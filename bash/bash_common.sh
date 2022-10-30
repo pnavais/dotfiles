@@ -315,6 +315,13 @@ function isOSX() {
 }
 
 #######################################
+# Checks if we are running on ARM64
+#######################################
+function isARM64() {
+	[[ $(uname -m) =~ ^aarch64$ ]] && return 0 || return 1;
+}
+
+#######################################
 # Checks if an app is available
 # Param:
 #    - appName : Name of the app

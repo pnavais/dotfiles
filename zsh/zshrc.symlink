@@ -147,56 +147,56 @@ function maketar() { tar cvzf "${1%%/}.tar.gz"  "${1%%/}/"; }
 function makezip() { zip -r "${1%%/}.zip" "$1" ; }
 
 function xc {
- if [ -z "$1" ]; then
-    # display usage if no parameters given
-    echo "Usage: xc <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
- else
-    if [ -f $1 ] ; then
-        # NAME=${1%.*}
-        # mkdir $NAME && cd $NAME
-        case $1 in
-          *.tar.bz2)   tar xvjf $1    ;;
-          *.tar.gz)    tar xvzf $1    ;;
-          *.tar.xz)    tar xvJf $1    ;;
-          *.lzma)      unlzma $1      ;;
-          *.bz2)       bunzip2 $1     ;;
-          *.rar)       unrar x -ad $1 ;;
-          *.gz)        gunzip $1      ;;
-          *.tar)       tar xvf $1     ;;
-          *.tbz2)      tar xvjf $1    ;;
-          *.tgz)       tar xvzf $1    ;;
-          *.zip)       unzip $1       ;;
-          *.Z)         uncompress $1  ;;
-          *.7z)        7z x $1        ;;
-          *.xz)        unxz $1        ;;
-          *.exe)       cabextract $1  ;;
-          *)           echo "xc: '$1' - unknown archive method" ;;
-        esac
-    else
-        echo "$1 - file does not exist"
-    fi
-fi
+	if [ -z "$1" ]; then
+		# display usage if no parameters given
+		echo "Usage: xc <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
+	else
+		if [ -f $1 ] ; then
+			# NAME=${1%.*}
+			# mkdir $NAME && cd $NAME
+			case $1 in
+				*.tar.bz2)   tar xvjf $1    ;;
+				*.tar.gz)    tar xvzf $1    ;;
+				*.tar.xz)    tar xvJf $1    ;;
+				*.lzma)      unlzma $1      ;;
+				*.bz2)       bunzip2 $1     ;;
+				*.rar)       unrar x -ad $1 ;;
+				*.gz)        gunzip $1      ;;
+				*.tar)       tar xvf $1     ;;
+				*.tbz2)      tar xvjf $1    ;;
+				*.tgz)       tar xvzf $1    ;;
+				*.zip)       unzip $1       ;;
+				*.Z)         uncompress $1  ;;
+				*.7z)        7z x $1        ;;
+				*.xz)        unxz $1        ;;
+				*.exe)       cabextract $1  ;;
+				*)           echo "xc: '$1' - unknown archive method" ;;
+			esac
+		else
+			echo "$1 - file does not exist"
+		fi
+	fi
 }
 
 # jump directorys upwards until it hits a directory with multiple folders
 up(){
-  local d=""
-  limit=$1
-  for ((i=1 ; i <= limit ; i++))
-    do
-      d=$d/..
-    done
-  d=$(echo $d | sed 's/^\///')
-  if [ -z "$d" ]; then
-    d=..
-  fi
-  cd $d
+	local d=""
+	limit=$1
+	for ((i=1 ; i <= limit ; i++))
+	do
+		d=$d/..
+	done
+	d=$(echo $d | sed 's/^\///')
+	if [ -z "$d" ]; then
+		d=..
+	fi
+	cd $d
 }
 
 # create an directory and directly cd into it
 mcd () {
-  mkdir -p $1
-  cd $1
+	mkdir -p $1
+	cd $1
 }
 
 # set PATH so it includes user's private bin directories
@@ -215,8 +215,8 @@ fi
 
 # Configure list colors
 if [ "$TERM" != "dumb" ]; then
-  export LS_OPTIONS='--color=auto' 
-  eval `dircolors ~/.dir_colors_db/dircolors.ansi-dark` 
+	export LS_OPTIONS='--color=auto'
+	eval `dircolors ~/.dir_colors_db/dircolors.ansi-dark`
 fi
 
 [ -e "/etc/DIR_COLORS" ] && DIR_COLORS="/etc/DIR_COLORS"
@@ -225,7 +225,7 @@ fi
 eval "`dircolors -b $DIR_COLORS`"
 
 # Workaround for wsl
-unsetopt BG_NICE 
+unsetopt BG_NICE
 
 # Complete aliases
 setopt COMPLETE_ALIASES
@@ -289,19 +289,17 @@ export SDKMAN_DIR="/usr/local/sdkman"
 
 # Fuzzy finder configuration (FZF)
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
+[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 
-HAS_RG=$(command -v rg) 
+HAS_RG=$(command -v rg)
 if [ -n "$HAS_RG" ]; then
-  export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
+	export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
 else
-  HAS_AG=$(command -v ag)
-  [ -n "$HAS_AG" ] && export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git --ignore node_modules -g ""'
+	HAS_AG=$(command -v ag)
+	[ -n "$HAS_AG" ] && export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git --ignore node_modules -g ""'
 fi
 [ -n "$FZF_DEFAULT_COMMAND" ] && export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-
-# fnm
-export PATH=$HOME/.fnm:$PATH
-eval "`fnm env --multi`"
 
 # Load local config
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local

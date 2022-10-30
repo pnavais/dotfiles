@@ -210,6 +210,8 @@ export SDKMAN_DIR="/usr/local/sdkman"
 
 # Fuzzy finder configuration (FZF)
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -f /usr/share/fzf/completion.bash ] && source /usr/share/fzf/completion.bash
+[ -f /usr/share/fzf/key-bindings.bash ] && source /usr/share/fzf/key-bindings.bash
 
 HAS_RG=$(command -v rg) 
 if [ -n "$HAS_RG" ]; then
@@ -219,10 +221,6 @@ else
   [ -n "$HAS_AG" ] && export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git --ignore node_modules -g ""'
 fi
 [ -n "$FZF_DEFAULT_COMMAND" ] && export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-
-# fnm
-export PATH=$HOME/.fnm:$PATH
-eval "`fnm env --multi`"
 
 # Load local config
 [ -f ~/.bash_profile.local ] && source ~/.bash_profile.local
