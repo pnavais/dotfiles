@@ -28,6 +28,6 @@ showSection "Performing Neovim Customization";
 showSubSection "Installing custom configuration";
 #if isOSX; then
 	printf "$(pad "Installing $(ansi --green \"Neovim\ profile\")")";
-	mkdir -p $NEOVIM_CONFIG_PATH && ln -fs $SCRIPT_DIR/init.vim $NEOVIM_CONFIG_PATH/
+	mkdir -p $NEOVIM_CONFIG_PATH && ln -fs $SCRIPT_DIR/init.lua $NEOVIM_CONFIG_PATH/
     showResultOrExit;
 #fi
