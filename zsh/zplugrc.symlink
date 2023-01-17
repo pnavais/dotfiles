@@ -15,7 +15,7 @@ zplug "plugins/sudo",   from:oh-my-zsh
 
 zplug "djui/alias-tips"
 zplug "supercrabtree/k"
-zplug "changyuheng/fz", defer:1
+#zplug "changyuheng/fz", defer:1
 
 # Bundles from zsh-users
 zplug "zsh-users/zsh-syntax-highlighting"
@@ -24,12 +24,12 @@ zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-history-substring-search", defer:3 # Should be loaded last.
 
 # Load the theme.
-zplug mafredri/zsh-async, defer:0 
+#zplug mafredri/zsh-async, defer:0 
 #zplug sindresorhus/pure, use:pure.zsh, as:theme
-zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
+#zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
 
 # Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
+    if ! zplug check --verbose; then
     printf "Install? [y/N]: "
     if read -q; then
         echo; zplug install

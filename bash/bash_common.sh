@@ -311,14 +311,21 @@ function arrayContains() {
 # Checks if we are running on Mac OS X
 #######################################
 function isOSX() {
-	[[ $OSTYPE =~ ^darwin ]] && return 0 || return 1;
+    [[ $OSTYPE =~ ^darwin ]] && return 0 || return 1;
 }
 
 #######################################
 # Checks if we are running on ARM64
 #######################################
 function isARM64() {
-	[[ $(uname -m) =~ ^aarch64$ ]] && return 0 || return 1;
+    [[ $(uname -m) =~ ^aarch64$ ]] && return 0 || return 1;
+}
+
+#######################################
+# Checks if we are running on Linux
+#######################################
+function isLinux() {
+    [[ $OSTYPE =~ ^linux ]] && return 0 || return 1;
 }
 
 #######################################

@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 ####################################################################################
-# java-config.sh
+# nvim-config.sh
 # --------------
 #
-# Perform additional Java configuration
+# Perform Neovim installation
 #
 ####################################################################################
 
@@ -31,7 +31,7 @@ git clone --depth 1 "https://github.com/wbthomason/packer.nvim"\
 showResultOrExit;
 
 showSubSection "Fetching plugins"
-printf "$(pad "Fetching $(ansi --green \"Packer plugins\")")";
+printf "$(pad "Fetching $(ansi --green \"Packer\ plugins\")")";
 nvim -u $SCRIPT_DIR/init-install.lua --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 showResultOrExit;
 

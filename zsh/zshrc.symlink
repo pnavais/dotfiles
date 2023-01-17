@@ -102,6 +102,7 @@ ALERT=${BWhite}${On_Red} # Bold White on red background
 
 # LSD
 alias ll='lsd -lh --group-dirs=first'
+alias lll='lsd -ltrah --group-dirs=first'
 alias la='lsd -a --group-dirs=first'
 alias l='lsd --group-dirs=first'
 alias lla='lsd -lha --group-dirs=first'
@@ -117,10 +118,6 @@ alias less='less -r'
 alias cls="clear"
 alias ..="cd .."
 alias cd..="cd .."
-#alias ls="ls -CF --color=auto"
-#alias ll="ls -lisa --color=auto"
-#alias lsl="ls -lhFA | less"
-#alias ls='ls $LS_OPTIONS'
 alias home="cd ~"
 alias df="df -ahiT --total"
 alias md="mkdir -pv"
@@ -139,6 +136,12 @@ alias fgrep="fgrep --color=auto"
 alias egrep="egrep --color=auto"
 alias ccat="pygmentize -O style=monokai -f console256 -g"
 #alias ssh='TERM=xterm256-color ssh'
+
+# Pbcopy / pbpaste
+if command -v xclip &>/dev/null; then
+	alias pbcopy='xclip -selection clipboard'
+	alias pbpaste='xclip -selection clipboard -o'
+fi
 
 # Creates an archive (*.tar.gz) from given directory.
 function maketar() { tar cvzf "${1%%/}.tar.gz"  "${1%%/}/"; }
@@ -300,6 +303,13 @@ else
 	[ -n "$HAS_AG" ] && export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git --ignore node_modules -g ""'
 fi
 [ -n "$FZF_DEFAULT_COMMAND" ] && export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# Configure Bat
+export PROMPT_EOL_MARK=''
+export BAT_PAGER='less -RX'
+
+# Zoxide
+eval "$(zoxide init zsh)"
 
 # Load local config
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
