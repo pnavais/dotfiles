@@ -34,7 +34,7 @@ fi
 showSubSection "Configuring Git misc utils"
 if isLinux; then
 	mkdir -p $DELTA_THEMES_DIR
-	printf "$(pad "Fetching $(ansi --green \"Delta themes\")")";
+	printf "$(pad "Fetching $(ansi --green \"Delta\ themes\")")";
 	curl -o ${DELTA_THEMES_DIR}/themes.gitconfig -sfL "https://raw.githubusercontent.com/dandavison/delta/master/themes.gitconfig"
 	showResultOrExit;
 fi
