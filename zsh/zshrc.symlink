@@ -113,7 +113,6 @@ alias ls='lsd --group-dirs=first'
 alias cat='bat --color=always'
 alias catn='/usr/bin/cat'
 alias catnl='bat --paging=never'
-alias less='less -r'
 
 alias cls="clear"
 alias ..="cd .."
@@ -306,10 +305,14 @@ fi
 
 # Configure Bat
 export PROMPT_EOL_MARK=''
-export BAT_PAGER='less -RX'
+export BAT_PAGER='less -RXF'
+export PAGER=$BAT_PAGER
 
 # Zoxide
 eval "$(zoxide init zsh)"
+
+# Starship
+eval "$(starship init zsh)"
 
 # Load local config
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
