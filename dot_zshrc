@@ -64,8 +64,6 @@ bindkey -e
 bindkey "^[[3~" delete-char
 bindkey  "^[[H" beginning-of-line
 bindkey  "^[[F" end-of-line
-bindkey "^[[1~" beginning-of-line # Alternative key code
-bindkey "^[[4~" end-of-line # Alternative key code
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 bindkey '^[[A' history-substring-search-up
