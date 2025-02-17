@@ -1,0 +1,118 @@
+#-------------------------------------------------------------
+#
+#   ░█▀█░█▀█░█░█░█▀▄░█▀█░█░░░█░░░░░▀▀█░█▀▀░█░█
+#   ░█▀▀░█▀█░░█░░█▀▄░█▀█░█░░░█░░░░░▄▀░░▀▀█░█▀█
+#   ░▀░░░▀░▀░░▀░░▀▀░░▀░▀░▀▀▀░▀▀▀░░░▀▀▀░▀▀▀░▀░▀
+#
+# ZSH configuration, (c) Pablo Navais <pnavais@gmail.com> 2025
+# ------------------------------------------------------------
+
+# Antidote
+# --------
+
+export ANTIDOTE_HOME="$HOME/.antidote"
+[[ ! -d "${ANTIDOTE_HOME}" ]] && mkdir -p ${ANTIDOTE_HOME}
+
+# Set the root name of the plugins files (.txt and .zsh) antidote will use.
+zsh_plugins=${ZDOTDIR:-~}/.zsh_plugins
+
+# Ensure the .zsh_plugins.txt file exists so you can add plugins.
+[[ -f ${zsh_plugins}.txt ]] || touch ${zsh_plugins}.txt
+
+# Lazy-load antidote from its functions directory.
+fpath=(${ANTIDOTE_SRC:-~.local/share/antidote}/functions $fpath)
+autoload -Uz antidote
+
+# Generate a new static file whenever .zsh_plugins.txt is updated.
+if [[ ! ${zsh_plugins}.zsh -nt ${zsh_plugins}.txt ]]; then
+	antidote bundle <${zsh_plugins}.txt >|${zsh_plugins}.zsh
+fi
+
+# Source your static plugins file.
+source ${zsh_plugins}.zsh
+
+# Aliases
+# -------
+
+# Bat
+alias cat='bat --color=always'
+alias catn='command cat'
+alias catnl='bat --paging=never'
+
+# Eza
+alias le="eza -l --icons --git -a"
+alias lt="eza --tree --level=2 --long --icons --git"
+alias ltree="eza --tree --level=2  --icons --git"
+
+# LSD
+alias ll='lsd -lh --group-dirs=first'
+alias lll='lsd -ltrah --group-dirs=first'
+alias la='lsd -a --group-dirs=first'
+alias l='lsd --group-dirs=first'
+alias lla='lsd -lha --group-dirs=first'
+alias lsl="lsd --color=always -lhFA --group-dirs=first | less -R"
+alias ls='lsd --group-dirs=first'
+
+# ZSH misc
+# --------
+
+# Load colors first
+autoload -Uz colors && colors
+
+# Enable emacs mode for the keybindings
+bindkey -e
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+# History
+HISTSIZE=5000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase # Remove duplicates from history
+setopt appendhistory
+setopt sharehistory # Share history across shell sessions
+setopt hist_ignore_space # Prevents saving commands starting with a space
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
+
+# Add additional figlet fonts
+[[ $+commands[figlet] ]] && export FIGLET_FONTDIR="$HOME/.local/share/figlet/fonts"
+
+# Default ls colors
+[[ $+commands[dircolors] ]] && eval "$(dircolors)"
+
+# Completion styling
+
+zstyle ':plugin:ez-compinit' 'use-cache' 'yes'
+zstyle ':plugin:ez-compinit' 'compstyle' 'zshzoo'
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+zstyle ':fzf-tab:complete:z:*' fzf-preview 'eza -1 --color=always $realpath'
+zstyle ':fzf-tab:complete:z:*' fzf-flags --preview-window=right:50%:wrap
+
+# Starship
+# --------
+eval "$(starship init zsh)"
+
+# Mise
+# ----
+zsh-defer eval "$(mise activate zsh)"
+
+# Shell integrations
+# ------------------
+eval "$(fzf --zsh)"
+
+# Zoxide
+# ------
+zsh-defer eval "$(zoxide init zsh)"
+
+# Additional configs
+# ------------------
+
+# Load local config
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
