@@ -61,6 +61,7 @@ autoload -Uz colors && colors
 
 # Enable emacs mode for the keybindings
 bindkey -e
+bindkey "^[[3~" delete-char
 bindkey  "^[[H" beginning-of-line
 bindkey  "^[[F" end-of-line
 bindkey '^p' history-search-backward
