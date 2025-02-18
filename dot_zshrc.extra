@@ -6,14 +6,51 @@ function nvims() {
         xargs -d$'\n' -n1 bash -c 'NVIM_APPNAME="$1" nvim' --
 }
 
-# Create Nvim aliases for available distributions
-nv_installs=($(find -L "${XDG_CONFIG_HOME:-$HOME/.config}" -mindepth 2 -maxdepth 2 -name init.lua -o -name init.vim | awk -F/ '{print $(NF-1)}'))
+function setup_nvims() {
 
-for nv_inst in ${nv_installs}
-do
-	alias_name=${nv_inst:l}
-	[[ $alias_name != "nv"* ]] && alias_name="nv-${alias_name}" || alias_name="nv-${alias_name#nv}"
-	alias_name=${alias_name%vim}
-	#eval "alias $alias_name=\"NVIM_APPNAME=\\\"$nv_inst\\\" nvim\""
-	eval "function $alias_name() { NVIM_APPNAME=\"$nv_inst\" nvim \$@}"
-done
+    # Create Nvim wrapper scripts for available distributions
+    local -A nv_installs
+    local -A nv_aliases
+    while IFS= read -r line; do
+	    nv_installs[$line]=$line
+    done < <(find -L "${XDG_CONFIG_HOME:-$HOME/.config}" -mindepth 2 -maxdepth 2 -name init.lua -o -name init.vim | awk -F/ '{print $(NF-1)}')
+
+    for nv_inst in ${(k)nv_installs}
+    do
+	    alias_name=${nv_inst:l}
+	    [[ $alias_name != "nv"* ]] && alias_name="nv-${alias_name}" || alias_name="nv-${alias_name#nv}"
+	    alias_name=${alias_name%vim}
+
+            # We are creating if needed wrapper scripts for all Nvim distros
+	    # because whenever we use an alias or function in $EDITOR env var it is not quite supported by 
+	    # some tools (e.g. chezmoi). However feel free to uncomment any other option (alias or function)
+
+	    #eval "alias $alias_name=\"NVIM_APPNAME=\\\"$nv_inst\\\" nvim\"" # Uncomment this line to create just an alias
+	    #eval "function $alias_name() { NVIM_APPNAME=\"$nv_inst\" nvim \$@}" # Uncomment this line to create a function
+
+	    # Check wrapper script is in path
+	    if [[ ! -e /usr/local/bin/$alias_name ]]; then
+		command cat <<-EOF > /usr/local/bin/$alias_name
+		#!/usr/bin/env sh
+		NVIM_APPNAME="$nv_inst" nvim \$@
+		EOF
+		chmod +x /usr/local/bin/$alias_name
+	    fi
+	    nv_aliases[$alias_name]=$alias_name
+    done
+
+    # Cleanup Nvim wrapper scripts for distributions not available anymore
+    local -A nv_wrappers
+    while IFS= read -r line; do
+	    nv_wrappers[$line]=$line
+    done < <(find -L /usr/local/bin -type f -name "nv-*" -exec basename {} \;)
+
+    for nv_inst in ${(k)nv_wrappers}
+    do
+	    if [[ ! ${nv_aliases[(r)$nv_inst]} ]]; then
+		    rm /usr/local/bin/$nv_inst
+	    fi
+    done
+}
+
+zsh-defer setup_nvims
