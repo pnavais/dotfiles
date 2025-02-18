@@ -1,6 +1,0 @@
-function nvims() {
-    find -L "${XDG_CONFIG_HOME:-$HOME/.config}" -mindepth 2 -maxdepth 2 -name init.lua -o -name init.vim | \
-        awk -F/ '{print $(NF-1)}' | \
-        fzf --prompt ' Neovim config  ' --layout=reverse --border --exit-0 |\
-        xargs -d$'\n' -n1 bash -c 'NVIM_APPNAME="$1" nvim' --
-}
