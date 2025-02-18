@@ -48,6 +48,7 @@
           pkgs.eza
           pkgs.fd
           pkgs.figlet
+          pkgs.file
           pkgs.findutils
           pkgs.fortune
           pkgs.fzf
@@ -57,6 +58,7 @@
           pkgs.gzip
           pkgs.htop
           pkgs.hyperfine
+          pkgs.iconv
           pkgs.jq
           pkgs.kitty
           pkgs.lsd
