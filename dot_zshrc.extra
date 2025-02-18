@@ -14,5 +14,6 @@ do
 	alias_name=${nv_inst:l}
 	[[ $alias_name != "nv"* ]] && alias_name="nv-${alias_name}" || alias_name="nv-${alias_name#nv}"
 	alias_name=${alias_name%vim}
-	eval "alias $alias_name=\"NVIM_APPNAME=\\\"$nv_inst\\\" nvim\""
+	#eval "alias $alias_name=\"NVIM_APPNAME=\\\"$nv_inst\\\" nvim\""
+	eval "function $alias_name() { NVIM_APPNAME=\"$nv_inst\" nvim }"
 done
