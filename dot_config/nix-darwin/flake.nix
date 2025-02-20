@@ -52,6 +52,7 @@
           pkgs.findutils
           pkgs.fortune
           pkgs.fzf
+          pkgs.gawk
           pkgs.git
           pkgs.gnused
           pkgs.gnutar
