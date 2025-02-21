@@ -34,6 +34,11 @@ source ${zsh_plugins}.zsh
 # Aliases
 # -------
 
+# Misc
+alias cls='clear'
+alias ..='cd ..'
+alias cd..='cd ..'
+
 # Bat
 alias cat='bat --color=always'
 alias catn='command cat'
