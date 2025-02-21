@@ -1,76 +1,57 @@
+[general]
 live_config_reload = true
 
 [font]
-size = 10.0
+size = 15.0
 
 [font.normal]
-family = "Cascadia Code PL"
+family = "JetBrainsMono Nerd Font"
 
 [window.dimensions]
-columns = 130
-lines = 35
+columns = 150
+lines = 30 
 
 [window.padding]
 x = 10
 y = 10
 
+[cursor]
+style = { shape = "Block", blinking = "Always" }
+
 [colors.bright]
-black = "#7970A9"
-blue = "#AA99FF"
-cyan = "#99FFEE"
-green = "#A2FF99"
-magenta = "#FF99CC"
-red = "#FFAA99"
-white = "#FFFFFF"
-yellow = "#FFFF99"
+black = "#5C6370"
+blue = "#61AFEF"
+cyan = "#54AFBC"
+green = "#98C379"
+magenta = "#C678DD"
+red = "#E86671"
+white = "0xf7f7f7"
+yellow = "#E5C07B"
 
 [colors.cursor]
-cursor = "CellForeground"
-text = "CellBackground"
+cursor = "#D9D9D9"
+text = "#CDD6F4"
 
-[colors.footer_bar]
-background = "#22212C"
-foreground = "#F8F8F2"
-
-[colors.hints.end]
-background = "#22212C"
-foreground = "#FFFF80"
-
-[colors.hints.start]
-background = "#FFFF80"
-foreground = "#22212C"
-
-[colors.line_indicator]
-background = "None"
-foreground = "None"
+[colors.dim]
+black = "#5C6370"
+blue = "#61AFEF"
+cyan = "0x5c8482"
+green = "#98C379"
+magenta = "0x6e4962"
+red = "0x74423f"
+white = "0x828282"
+yellow = "#E5C07B"
 
 [colors.normal]
-black = "#7970A9"
-blue = "#9580FF"
-cyan = "#80FFEA"
-green = "#8AFF80"
-magenta = "#FF80BF"
-red = "#FF9580"
-white = "#F8F8F2"
-yellow = "#FFFF80"
+black = "#181A1F"
+blue = "#61AFEF"
+cyan = "#54AFBC"
+green = "#98C379"
+magenta = "#C678DD"
+red = "#E86671"
+white = "#ABB2BF"
+yellow = "#E5C07B"
 
 [colors.primary]
-background = "#22212C"
-bright_foreground = "#FFFFFF"
-foreground = "#F8F8F2"
-
-[colors.search.focused_match]
-background = "#FFCA80"
-foreground = "#454158"
-
-[colors.search.matches]
-background = "#8AFF80"
-foreground = "#454158"
-
-[colors.selection]
-background = "#454158"
-text = "CellForeground"
-
-[colors.vi_mode_cursor]
-cursor = "CellForeground"
-text = "CellBackground"
+background = "#1E1E2E"
+foreground = "0xd6d6d6"
