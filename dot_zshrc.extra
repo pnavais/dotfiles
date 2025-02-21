@@ -10,6 +10,9 @@
 # Misc
 # ----
 
+# Get current IP
+alias myip="curl http://ipecho.net/plain; echo"
+
  # Make colorcoding available for everyone
 Black='\e[0;30m'        # Black
 Red='\e[0;31m'          # Red
@@ -44,6 +47,10 @@ NC="\e[m"               # Color Reset
 
 # Functions
 # ---------
+
+# Creates an archive (*.tar.gz) from a given directory
+function maketar() { tar cvzf "${1%%/}.tar.gz"  "${1%%/}/"; }
+
 
 # Custom neovim fast switcher
 function nvims() {
