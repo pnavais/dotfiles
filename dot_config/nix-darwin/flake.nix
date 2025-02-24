@@ -36,7 +36,7 @@
           pkgs.antidote
           pkgs.ast-grep
           pkgs.bat
-	  pkgs.bitwarden-cli
+          pkgs.bitwarden-cli
           pkgs.boxes
           pkgs.chezmoi
           pkgs.choose
