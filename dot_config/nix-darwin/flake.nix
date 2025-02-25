@@ -24,7 +24,7 @@
   outputs = { self, nix-darwin, mac-app-util, nix-homebrew, homebrew-core
     , homebrew-cask, homebrew-bundle, ... }:
     let
-      configuration = { pkgs, ... }: {
+      configuration = { pkgs, config, ... }: {
 
         # Allow non opensource apps
         nixpkgs.config.allowUnfree = true;
