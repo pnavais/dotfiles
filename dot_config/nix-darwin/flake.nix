@@ -65,6 +65,7 @@
           pkgs.kitty
           pkgs.lsd
           pkgs.macchina
+          pkgs.mas
           pkgs.mise
           pkgs.neovim
           pkgs.nil
@@ -94,7 +95,6 @@
         homebrew = {
           taps = builtins.attrNames config.nix-homebrew.taps;
           enable = true;
-          brews = [ "mas" ];
           casks = [
             "alfred"
             "arc"
@@ -122,7 +122,7 @@
             "Things 3" = 904280696;
           };
           onActivation = {
-            #cleanup = "zap"; # Weird issue when rebuilding
+            cleanup = "zap";
             autoUpdate = true;
             upgrade = true;
           };
