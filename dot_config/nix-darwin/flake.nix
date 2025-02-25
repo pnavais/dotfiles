@@ -92,6 +92,7 @@
 
         # Brew packages
         homebrew = {
+          taps = builtins.attrNames config.nix-homebrew.taps;
           enable = true;
           brews = [ "mas" ];
           casks = [
