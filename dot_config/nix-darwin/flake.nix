@@ -79,6 +79,7 @@
           pkgs.ripgrep
           pkgs.silver-searcher
           pkgs.starship
+          pkgs.tldr
           pkgs.tmux
           pkgs.toilet
           pkgs.vim
