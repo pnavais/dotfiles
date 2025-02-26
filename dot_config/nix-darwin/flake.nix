@@ -63,6 +63,7 @@
           pkgs.iconv
           pkgs.jq
           pkgs.kitty
+          pkgs.lazygit
           pkgs.lsd
           pkgs.macchina
           pkgs.mas
