@@ -19,3 +19,9 @@ map("v", "<C-a>", "^", { desc = "Go to first non-blank character of line" })
 map("n", "<C-e>", "$", { desc = "Go to end of line" })
 map("i", "<C-e>", "<C-o>$", { desc = "Go to end of line" })
 map("v", "<C-e>", "$", { desc = "Go to end of line" })
+
+-- Switch to next buffer with Tab
+map("n", "<Tab>", "<cmd>bnext<CR>", { desc = "Next buffer" })
+
+-- Switch to previous buffer with Shift-Tab
+map("n", "<S-Tab>", "<cmd>bprevious<CR>", { desc = "Previous buffer" })
