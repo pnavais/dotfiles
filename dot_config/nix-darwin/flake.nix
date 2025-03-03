@@ -148,6 +148,9 @@
           pkgs.nerd-fonts.martian-mono
           pkgs.nerd-fonts.meslo-lg
           pkgs.nerd-fonts.monaspace
+
+          # Specific Noto fonts
+          (pkgs.noto-fonts.override { variants = [ "NotoSansMono" "NotoSansSymbols" "NotoSansSymbols2" ]; })
         ];
 
         # Necessary for using flakes on this system.
