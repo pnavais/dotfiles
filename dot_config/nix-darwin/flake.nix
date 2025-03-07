@@ -57,7 +57,7 @@
           pkgs.fortune
           pkgs.fzf
           pkgs.gawk
-          pkgs.ghostty
+          #pkgs.ghostty
           pkgs.git
           pkgs.gnused
           pkgs.gnutar
