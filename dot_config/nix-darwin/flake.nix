@@ -75,7 +75,7 @@
           pkgs.nil
           pkgs.nixfmt-classic
           pkgs.nixd
-          # pkgs.obsidian
+          pkgs.obsidian
           pkgs.openssh
           pkgs.openssl
           pkgs.procps
