@@ -29,3 +29,6 @@ bindings = [
   { key = "Left",   mods = "Alt", chars = "\u001BB"},
   { key = "Right",  mods = "Alt", chars = "\u001BF" } 
 ]
+
+[env]
+CROSSFONT_FALLBACK_FONTS = "Noto Sans Symbols 2,Noto Sans Synmbols,Noto Sans"
