@@ -31,4 +31,4 @@ bindings = [
 ]
 
 [env]
-CROSSFONT_FALLBACK_FONTS = "Noto Sans Symbols 2,Noto Sans Synmbols,Noto Sans"
+CROSSFONT_FALLBACK_FONTS = ""
