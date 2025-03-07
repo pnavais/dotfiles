@@ -57,6 +57,7 @@
           pkgs.fortune
           pkgs.fzf
           pkgs.gawk
+          pkgs.ghostty
           pkgs.git
           pkgs.gnused
           pkgs.gnutar
@@ -114,6 +115,7 @@
             "jetbrains-toolbox"
             "keka"
             "monitorcontrol"
+            "orbstack"
             "rectangle"
             "spotify"
             "warp"
