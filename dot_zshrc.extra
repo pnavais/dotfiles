@@ -10,9 +10,6 @@
 # Misc
 # ----
 
-# Alacritty / Crossfont fallback fonts
-export CROSSFONT_FALLBACK_FONTS="Noto Sans Symbols 2,Noto Sans Synmbols,Noto Sans"
-
 # Get current IP
 alias myip="curl http://ipecho.net/plain; echo"
 
