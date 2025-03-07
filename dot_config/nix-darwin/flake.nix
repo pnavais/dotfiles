@@ -29,6 +29,9 @@
         # Allow non opensource apps
         nixpkgs.config.allowUnfree = true;
 
+        # Import all custom overlays
+        nixpkgs.overlays = (import ./overlays).allOverlays;
+
         # List packages installed in system profile. To search by name, run:
         # $ nix-env -qaP | grep wget
         environment.systemPackages = [
@@ -72,7 +75,7 @@
           pkgs.nil
           pkgs.nixfmt-classic
           pkgs.nixd
-          pkgs.obsidian
+          # pkgs.obsidian
           pkgs.openssh
           pkgs.openssl
           pkgs.procps
@@ -150,7 +153,9 @@
           pkgs.nerd-fonts.monaspace
 
           # Specific Noto fonts
-          (pkgs.noto-fonts.override { variants = [ "NotoSansMono" "NotoSansSymbols" "NotoSansSymbols2" ]; })
+          (pkgs.noto-fonts.override {
+            variants = [ "NotoSansMono" "NotoSansSymbols" "NotoSansSymbols2" ];
+          })
         ];
 
         # Necessary for using flakes on this system.
