@@ -57,7 +57,6 @@
           pkgs.fortune
           pkgs.fzf
           pkgs.gawk
-          #pkgs.ghostty
           pkgs.git
           pkgs.gnused
           pkgs.gnutar
@@ -108,6 +107,7 @@
             "brave-browser"
             "doppler"
             "firefox"
+            "ghostty"
             "google-chrome"
             "hammerspoon"
             "iina"
