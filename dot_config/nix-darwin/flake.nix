@@ -78,6 +78,7 @@
           pkgs.obsidian
           pkgs.openssh
           pkgs.openssl
+          pkgs.pastel
           pkgs.procps
           pkgs.procs
           pkgs.ripgrep
