@@ -1,0 +1,48 @@
+diff --git a/src/darwin/mod.rs b/src/darwin/mod.rs
+index 67ccb86..ba7bf8a 100644
+--- a/src/darwin/mod.rs
++++ b/src/darwin/mod.rs
+@@ -5,6 +5,7 @@ use std::ffi::CStr;
+ use std::iter;
+ use std::path::PathBuf;
+ use std::ptr;
++use std::env;
+ 
+ use core_foundation::array::{CFArray, CFIndex};
+ use core_foundation::base::{CFType, ItemRef, TCFType};
+@@ -42,6 +43,18 @@ use super::{
+ /// https://developer.apple.com/fonts/TrueType-Reference-Manual/RM07/appendixB.html
+ const MISSING_GLYPH_INDEX: u32 = 0;
+ 
++/// Extracts the list of fallback fonts to be used by crossfont from the env var (CROSSFONT_FALLBACK_FONTS)
++/// The format consists of a comma separated list of font names
++static FALLBACK_FONTS: Lazy<Vec<String>> = Lazy::new(|| {
++    iter::once("Apple Symbols".to_string())
++        .chain(env::var("CROSSFONT_FALLBACK_FONTS")
++            .unwrap_or_default()
++            .split(',')
++            .filter(|s| !s.is_empty())
++            .map(|s| s.trim().to_string()))
++        .collect()
++});
++
+ /// Font descriptor.
+ ///
+ /// The descriptor provides data about a font and supports creating a font.
+@@ -80,9 +93,13 @@ impl Descriptor {
+             // many chars. We add the symbols back in.
+             // Investigate if we can actually use the .-prefixed
+             // fallbacks somehow.
+-            if let Ok(apple_symbols) = new_from_name("Apple Symbols", size) {
+-                fallbacks.push(Font { ct_font: apple_symbols, fallbacks: Vec::new() })
+-            };
++            // Add additional fallback fonts
++            FALLBACK_FONTS.iter().for_each(|font_name| {
++                trace!("Loading fallback font [{}]", font_name);
++                if let Ok(fallback_font) = new_from_name(font_name, size) {
++                    fallbacks.push(Font { ct_font: fallback_font, fallbacks: Vec::new() })
++                }
++            });
+ 
+             fallbacks
+         } else {
