@@ -31,4 +31,4 @@ bindings = [
 ]
 
 [env]
-CROSSFONT_FALLBACK_FONTS = ""
+CROSSFONT_FALLBACK_FONTS = "Iosevka Nerd Font Mono"
