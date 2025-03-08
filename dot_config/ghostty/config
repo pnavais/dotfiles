@@ -1,0 +1,18 @@
+font-family = "JetBrainsMono Nerd Font"
+font-size = 15
+
+window-width = 164
+window-height = 32 
+
+window-padding-x = 12
+window-padding-y = 12
+
+window-save-state = always
+
+shell-integration = detect
+shell-integration-features = no-cursor,sudo,title
+cursor-style-blink = true
+cursor-style = block
+
+theme = light:rose-pine-dawn,dark:catppuccin-mocha
+
