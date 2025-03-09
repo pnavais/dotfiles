@@ -1,0 +1,10 @@
+[tools]
+go = "1.24.1"
+gradle = "8.13.0"
+java = "corretto-23.0.2.7.1"
+lua = "5.4.7"
+maven = "3.9.9"
+node = "23"
+python = "3.13.2"
+rust = "latest"
+usage = "latest"
