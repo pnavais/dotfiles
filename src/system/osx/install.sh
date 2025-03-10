@@ -28,6 +28,38 @@ source $BASH_MAIN/bash_deps.sh
 
 showSection "Performing Mac OSX installation";
 
+showSubSection "Installing build essentials"
+
+pad "Installing Xcode command line tools"
+# Check if Xcode Command Line Tools are installed
+MSG=$(xcode-select -p)
+if [[ -n $MSG ]]; then
+   showResultOrExit "(Skipped: Already installed)" 0
+else
+  # Find the correct package for installation
+  PROD=$(softwareupdate -l 2>/dev/null | grep "\*.*Command Line Tools" | head -n 1 | awk -F"*" '{print $2}' | sed -e 's/^ *//' | tr -d '\n')
+    
+  # Install the tools
+  if [[ -n "$PROD" ]]; then
+    #xcode-select --install
+    executeCmd "softwareupdate -i \"$PROD\" --verbose $IO_REDIR"
+  else
+    MSG="No Command Line Tools package found for installation."
+    showResultOrExit "(Skipped: $MSG)" 0
+  fi
+fi
+
+pad "Installing Rosetta"
+$(arch -x86_64 /usr/bin/true >/dev/null 2>&1 $IO_REDIR);
+if [[ $? -eq 0 ]]; then
+  showResultOrExit "(Skipped: Already installed)" 0
+else
+  executeCmd "echo \"A\n\" | softwareupdate --install-rosetta $IO_REDIR"
+fi
+
+
+showSubSection "Installing Nix & nix-darwin"
+
 pad "Installing Nix"
 if ! isAvailable $NIX_CMD; then
    # Install Nix through Determinate Nix installer
@@ -57,29 +89,3 @@ if ! isAvailable $NIX_DARWIN_CMD; then
   executeCmd "${NIX_DARWIN_INSTALL_CMD}"
 fi
 
-pad "Installing Xcode command line tools"
-# Check if Xcode Command Line Tools are installed
-MSG=$(xcode-select -p)
-if [[ -n $MSG ]]; then
-   showResultOrExit "(Skipped: Already installed)" 0
-else
-  # Find the correct package for installation
-  PROD=$(softwareupdate -l 2>/dev/null | grep "\*.*Command Line Tools" | head -n 1 | awk -F"*" '{print $2}' | sed -e 's/^ *//' | tr -d '\n')
-    
-  # Install the tools
-  if [[ -n "$PROD" ]]; then
-    #xcode-select --install
-    executeCmd "softwareupdate -i \"$PROD\" --verbose $IO_REDIR"
-  else
-    MSG="No Command Line Tools package found for installation."
-    showResultOrExit "(Skipped: $MSG)" 0
-  fi
-fi
-
-pad "Installing Rosetta"
-$(arch -x86_64 /usr/bin/true >/dev/null 2>&1 $IO_REDIR);
-if [[ $? -eq 0 ]]; then
-  showResultOrExit "(Skipped: Already installed)" 0
-else
-  executeCmd "echo \"A\n\" | softwareupdate --install-rosetta $IO_REDIR"
-fi

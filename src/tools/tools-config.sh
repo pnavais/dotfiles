@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 ####################################################################################
-# java-config.sh
-# --------------
+# tools-config.sh
+# ---------------
 #
-# Perform additional Java configuration
+# Perform additional Tools configuration
 #
 ####################################################################################
 
