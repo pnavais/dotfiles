@@ -19,6 +19,9 @@ NIX_DARWIN_CONF_DIR="/etc/nix-darwin"
 NIX_DARWIN_FLAKE="$NIX_DARWIN_CONF_DIR/flake.nix"
 NIX_CMD="nix"
 
+GITHUB_USERNAME="pnavais"
+CHEZMOI_HOME="$HOME/.local/share/chezmoi"
+
 # Imports
 ##########
 source $BASH_MAIN/bash_common.sh
@@ -89,3 +92,18 @@ if ! isAvailable $NIX_DARWIN_CMD; then
   executeCmd "${NIX_DARWIN_INSTALL_CMD}"
 fi
 
+showSection "Bootstrapping system"
+
+showSubSection "Installing dotfiles"
+pad "Initializing dotfiles with $(ansi --green chezmoi)"
+if [[ ! -d "$CHEZMOI_HOME" ]]; then
+  CHEZMOI_CMD="sh -c \"\$(curl -fsLS get.chezmoi.io)\" -- init --apply $GITHUB_USERNAME $IO_REDIR"
+  executeCmd "$CHEZMOI_CMD"
+else
+  showResult 0 "(Skipped)"
+fi
+
+showSubSection "Installing dependencies"
+pad "Building $(ansi --green nix-darwin) system"
+NIX_DARWIN_INSTALL_CMD="darwin-rebuild switch $IO_REDIR"
+executeCmd "${NIX_DARWIN_INSTALL_CMD}"
