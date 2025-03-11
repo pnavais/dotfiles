@@ -7,9 +7,9 @@
 
 # Globals
 #########
-SCRIPT_DIR=$(cd "$(dirname ${BASH_SOURCE[0]})"; pwd);
-BASH_MAIN="$SCRIPT_DIR/src/bash";
 INSTALL_DIR=$(mktemp -d -u --suffix dotfiles.tmp)
+[[ -n "${BASH_SOURCE[0]}" ]] && SCRIPT_DIR=$(cd "$(dirname ${BASH_SOURCE[0]})"; pwd) || SCRIPT_DIR=$INSTALL_DIR
+BASH_MAIN="$SCRIPT_DIR/src/bash";
 DOTFILES_REPO="https://github.com/pnavais/dotfiles"
 
 VERSION="1.0.0";
