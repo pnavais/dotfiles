@@ -63,7 +63,7 @@ function checkPrerequisites() {
      # Fech full repo in temp directory
      SCRIPT_DIR=$INSTALL_DIR
      BASH_MAIN="$SCRIPT_DIR/src/bash";
-     printf "\e[32m=>\e[0m Dowloading resources\e[0m\n"
+     printf "\e[32m=>\e[0m Downloading resources\e[0m\n"
      git clone $DOTFILES_REPO $INSTALL_DIR &>/dev/null
    fi
 }
