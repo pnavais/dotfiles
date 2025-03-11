@@ -101,25 +101,3 @@ done
 addInstallNote "\nInstallation finished."
 printNotes
 showExitMsg
-
-#showSubSection "Configuring Misc utils"
-
-# Install Tmux plugin manager
-# pad "Installing Tmux plugin manager"
-# if [ ! -d $HOME/.tmux/plugins/tpm ]; then
-	# TMUX_INSTALL_CMD="git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm $IO_REDIR"
-	# executeCmd "${TMUX_INSTALL_CMD}"
-# else
-  # showResult 0 "(Skipped)"
-# fi
-
-# Install Delta themes
-# DELTA_THEMES_DIR=${XDG_CONFIG_HOME:-~/.config}/delta
-# pad "Fetching Delta themes"
-# if [[ ! -d "${DELTA_THEMES_DIR}" ]]; then
-  # mkdir -p ${DELTA_THEMES_DIR}
-	# DELTA_THEMES_CMD="curl -o ${DELTA_THEMES_DIR}/themes.gitconfig -sfL \"https://raw.githubusercontent.com/dandavison/delta/master/themes.gitconfig\" $IOREDIR"
-	# executeCmd "${DELTA_THEMES_CMD}"
-# else
-  # showResult 0 "(Skipped)"
-# fi

@@ -97,7 +97,7 @@ showSection "Bootstrapping system"
 showSubSection "Installing dotfiles"
 pad "Initializing dotfiles with $(ansi --green chezmoi)"
 if [[ ! -d "$CHEZMOI_HOME" ]]; then
-  CHEZMOI_CMD="sh -c \"\$(curl -fsLS get.chezmoi.io)\" -- init --apply $GITHUB_USERNAME $IO_REDIR"
+  CHEZMOI_CMD="sh -c \"\$(curl -fsLS get.chezmoi.io)\" -- init --apply $GITHUB_USERNAME"
   executeCmd "$CHEZMOI_CMD"
 else
   showResult 0 "(Skipped)"
