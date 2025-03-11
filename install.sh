@@ -9,17 +9,16 @@
 #########
 SCRIPT_DIR=$(cd "$(dirname ${BASH_SOURCE[0]})"; pwd);
 BASH_MAIN="$SCRIPT_DIR/src/bash";
+INSTALL_DIR=$(mktemp -d -u --suffix dotfiles.tmp)
+DOTFILES_REPO="https://github.com/pnavais/dotfiles"
 
 VERSION="1.0.0";
 EMAIL="pnavais@hotmail.com"
 AUTHOR="Pablo Navais"
 YEAR="2025"
 
-# Imports
-##########
-source $BASH_MAIN/bash_common.sh
-source $BASH_MAIN/bash_deps.sh
 CURL_CMD="curl"
+GIT_CMD="git"
 
 # Functions
 ###########
@@ -29,16 +28,58 @@ CURL_CMD="curl"
 # installation
 #######################################
 function checkPrerequisites() {
+  commands=($CURL_CMD $GIT_CMD)
    # Check basic commands
-   if ! isAvailable $CURL_CMD; then
-      printf "${RED}[check failed]: \"${CURL_CMD}\" command could not be found${NC}"
-      exit 1
+   for cmd in ${commands[@]}; do
+     $(hash $cmd &>/dev/null);
+     if [[ $? -ne 0 ]]; then
+       printf "\e[31m[check failed]: \"${cmd}\" command could not be found$\e[0m"
+       exit 1
+     fi
+   done
+
+   # Check if we are inside the target repo and install files are there
+   inside_repo=0
+   missing_files=()
+   if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+     repo_url=$(git remote get-url origin)
+     if [[ "${repo_url,,}" =~ github.com[:|/]pnavais/dotfiles.git ]]; then
+       inside_repo=1
+       while read -r file; do
+         if [[ ! -f "$file" ]]; then
+           missing_files+=($file)
+         fi
+       done < <(git ls-tree -r HEAD --name-only src/ patches/)
+     fi
    fi
+
+   if [[ $inside_repo -eq 1 ]]; then
+     # Recover missing files
+     for missing_file in ${missing_files[@]}; do
+       printf "\e[32m=>\e[0m Reverting missing file \e[34m[$missing_files]\e[0m\n"
+       git checkout HEAD -- $missing_file 
+     done
+   else
+     # Fech full repo in temp directory
+     SCRIPT_DIR=$INSTALL_DIR
+     BASH_MAIN="$SCRIPT_DIR/src/bash";
+     printf "\e[32m=>\e[0m Dowloading resources\e[0m\n"
+     git clone $DOTFILES_REPO $INSTALL_DIR &>/dev/null
+   fi
+}
+
+#######################################
+# Perform cleanup of leftover resources
+#######################################
+function cleanup() {
+  # Do cleanup of temp files
+  if [[ -d "$INSTALL_DIR" ]]; then
+    rm -fr "$INSTALL_DIR" &>/dev/null
+  fi
 }
 
 ########### MAIN ################
 
-trap ctrl_c INT
 
 export VERBOSE=0
 PARAMS=""
@@ -74,10 +115,18 @@ eval set -- "$PARAMS"
 
 [[ $VERBOSE -eq 0 ]] && export IO_REDIR="&> /dev/null" || export IO_REDIR=""
 
+checkPrerequisites
+
+# Imports
+##########
+source $BASH_MAIN/bash_common.sh
+source $BASH_MAIN/bash_deps.sh
+
+trap 'cleanup; ctrl_c;' INT
+
 showBanner
 checkSudo
 
-checkPrerequisites
 showSection 'Environment preparation'
 
 if isOSX; then
@@ -90,7 +139,6 @@ else
   fail "System not supported"
 fi
 
-
 # Perform specific tools post-install config
 OLD_IFS=$IFS;
 IFS=$'\n';
@@ -101,3 +149,5 @@ done
 addInstallNote "\nInstallation finished."
 printNotes
 showExitMsg
+
+cleanup
