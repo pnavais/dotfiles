@@ -1,0 +1,91 @@
+\set QUIET ON
+
+--- Use table format (with headers across the top) by default, but switch to
+-- expanded table format when there's a lot of data, which makes it much
+-- easier to read.
+\x auto
+
+-- By default, NULL displays as an empty space. Is it actually an empty
+-- string, or is it null? This makes that distinction visible.
+\pset null '(null)'
+
+-- always show how long a query takes
+\timing
+
+\set VERBOSITY verbose
+-- Use a separate history file per-database.
+\set HISTFILE ~/.psql_history- :DBNAME
+
+-- If a command is run more than once in a row, only store it once in the
+-- history.
+\set HISTCONTROL ignoredups
+
+-- Autocomplete keywords (like SELECT) in upper-case, even if you started
+-- typing them in lower case.
+\set COMP_KEYWORD_CASE upper
+
+-- Fancy prompt
+\set PROMPT1 '%[%033[32m%]%M %[%033[33m%]%n@%/%[%033[0m%]%R> '
+
+-- a prompt wtih transaction information
+--\set PROMPT1 '%[%033[33;1m%]%x%[%033[0m%]%[%033[1m%]%/%[%033[0m%] %m %R%# '
+
+-- More input
+\set PROMPT2 '[more] %R > '
+
+-- Sets Unicode output
+\encoding unicode
+
+-- Show pretty unicode lines between rows and columns in select results.
+\pset linestyle unicode
+
+-- Show pretty lines around the outside of select results.
+\pset border 2
+
+-- Turn off the pager so that results just keep scrolling by, rather than stopping.
+--\pset pager off
+
+\set QUIET OFF
+
+\echo '\nCurrent Host Server Date Time : '`date` '\n'
+\echo 'Type \033[0;36m:menu\033[0m to display commands\n'
+
+\set menu '\\! echo "\033[0;33m\nAdministrative queries:\033[0m\n\n\t:version\t-- Show server version\n\t:settings\t-- Server Settings \n\t:ps\t\t-- Show running queries\n \t:locks\t\t-- Show locks and how long they have been locked\n\t:conninfo\t-- Server connections\n\t:activity\t-- Server activity\n\t:dbsize\t\t-- Database Size\n\t:tablesize\t-- Tables Size\n\t:uptime\t\t-- Server uptime\n\t:cachehit\t-- Cache hit ratio\n\t:indexusage\t-- Index usage\n\t:indexsize\t-- Index sizes\n\t:indextotal\t-- Total size of all indexes\n\t:outliers\t-- Slowest queries from pg_stat_statements\n\t:menu\t\t-- Help Menu\n\t\\\\h\t\t-- Help with SQL commands\n\t\\\\?\t\t-- Help with psql commands\n\n\033[0;33mDevelopment queries:\033[0m\n\n\t:sp\t\t-- Current Search Path\n\t:clear\t\t-- Clear screen\n\t:ll\t\t-- List\n\n\033[0;33mCheat sheet:\033[0m\n\n\tKill a process:\t\tSELECT pg_cancel_backend(pid)\n\tForce kill a process:\tSELECT pg_terminate_backend(pid)\n\"' 
+
+-- Administration queries
+
+\set settings 'select name, setting,unit,context from pg_settings;'
+
+\set version 'SELECT version();'
+
+\set ps 'SELECT pid, state, application_name AS source, age(now(),xact_start) AS running_for, waiting, query FROM pg_stat_activity WHERE query <> \'<insufficient privilege>\' AND state <> \'idle\' AND pid <> pg_backend_pid() ORDER BY query_start ASC;'
+
+\set locks 'SELECT a.datname, c.relname, l.transactionid, l.mode, l.granted, a.usename, a.query, a.query_start, age(now(), a.query_start) AS "age", a.pid FROM  pg_stat_activity a JOIN pg_locks l ON l.pid = a.pid JOIN pg_class c ON c.oid = l.relation ORDER BY a.query_start;'
+
+\set conninfo 'select usename, count(*) from pg_stat_activity group by usename;'
+
+\set activity 'select datname, pid, usename, application_name,client_addr, client_hostname, client_port, query, state from pg_stat_activity;'
+
+\set dbsize 'SELECT datname, pg_size_pretty(pg_database_size(datname)) db_size FROM pg_database ORDER BY db_size;'
+
+\set tablesize 'SELECT nspname || \'.\' || relname AS \"relation\", pg_size_pretty(pg_relation_size(C.oid)) AS "size" FROM pg_class C LEFT JOIN pg_namespace N ON (N.oid = C.relnamespace) WHERE nspname NOT IN (\'pg_catalog\', \'information_schema\') ORDER BY pg_relation_size(C.oid) DESC LIMIT 40;'
+
+\set uptime 'select now() - pg_postmaster_start_time() AS uptime;'
+
+\set cachehit 'SELECT \'index hit rate\' AS name, (sum(idx_blks_hit)) / sum(idx_blks_hit + idx_blks_read) AS ratio FROM pg_statio_user_indexes UNION ALL SELECT \'table hit rate\' AS name, sum(heap_blks_hit) / (sum(heap_blks_hit) + sum(heap_blks_read)) AS ratio FROM pg_statio_user_tables;'
+
+\set indexusage 'SELECT relname, CASE idx_scan WHEN 0 THEN \'Insufficient data\' ELSE (100 * idx_scan / (seq_scan + idx_scan))::text END percent_of_times_index_used, n_live_tup rows_in_table FROM pg_stat_user_tables ORDER BY n_live_tup DESC;'
+
+\set indexsize 'SELECT c.relname AS name, pg_size_pretty(sum(c.relpages::bigint*8192)::bigint) AS size FROM pg_class c LEFT JOIN pg_namespace n ON (n.oid = c.relnamespace) WHERE n.nspname NOT IN (\'pg_catalog\', \'information_schema\') AND n.nspname !~ \'^pg_toast\' AND c.relkind=\'i\' GROUP BY c.relname ORDER BY sum(c.relpages) DESC;'
+
+\set totalindexsize 'with sizes as ( SELECT sum(c.relpages::bigint*8192)::bigint AS size FROM pg_class c LEFT JOIN pg_namespace n ON (n.oid = c.relnamespace) WHERE n.nspname NOT IN (\'pg_catalog\', \'information_schema\') AND n.nspname !~ \'^pg_toast\' AND c.relkind=\'i\' GROUP BY c.relname ORDER BY sum(c.relpages) DESC) select pg_size_pretty(sum(size)) as total_index_size from sizes;'
+
+\set lastvacuum 'select relname, last_vacuum, last_analyze from pg_stat_all_tables where schemaname = \'public\';'
+
+\set outliers 'SELECT query AS qry, concat((total_time / calls), \' ms\') as avg_time, interval \'1 millisecond\' * total_time AS exec_time, to_char((total_time/sum(total_time) OVER()) * 100, \'FM90D0\') || \'%\'  AS prop_exec_time, to_char(calls, \'FM999G999G990\') AS ncalls, interval \'1 millisecond\' * (blk_read_time + blk_write_time) AS sync_io_time FROM pg_stat_statements WHERE userid = (SELECT usesysid FROM pg_user WHERE usename = current_user LIMIT 1) ORDER BY total_time DESC LIMIT 10;'
+
+-- Development queries:
+
+\set sp 'SHOW search_path;'
+\set clear '\\! clear;'
+\set ll '\\! ls -lrt;'
