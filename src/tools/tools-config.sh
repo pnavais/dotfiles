@@ -38,7 +38,7 @@ showSubSection "Configuring Misc utils"
 # Install Tmux plugin manager
 pad "Installing $(ansi --red-intense Tmux) plugin manager"
 if [ ! -d $HOME/.tmux/plugins/tpm ]; then
-  TMUX_INSTALL_CMD="git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm $IO_REDIR"
+  TMUX_INSTALL_CMD="git clone https://github.com/pnavais/tpm $HOME/.tmux/plugins/tpm $IO_REDIR"
   executeCmd "${TMUX_INSTALL_CMD}"
 else
   showResult 0 "(Skipped)"
