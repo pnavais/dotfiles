@@ -28,12 +28,11 @@ GIT_CMD="git"
 # installation
 #######################################
 function checkPrerequisites() {
-  commands=($CURL_CMD $GIT_CMD)
+  commands=("$CURL_CMD" "$GIT_CMD")
    # Check basic commands
-   for cmd in ${commands[@]}; do
-     $(hash $cmd &>/dev/null);
-     if [[ $? -ne 0 ]]; then
-       printf "\e[31m[check failed]: \"${cmd}\" command could not be found$\e[0m"
+   for cmd in "${commands[@]}"; do
+     if ! hash "$cmd" &>/dev/null; then
+       printf "\e[31m[check failed]: \"%s\" command could not be found$\e[0m" "$cmd"
        exit 1
      fi
    done
@@ -47,7 +46,7 @@ function checkPrerequisites() {
        inside_repo=1
        while read -r file; do
          if [[ ! -f "$file" ]]; then
-           missing_files+=($file)
+           missing_files+=("$file")
          fi
        done < <(git ls-tree -r HEAD --name-only src/ patches/)
      fi
@@ -55,16 +54,16 @@ function checkPrerequisites() {
 
    if [[ $inside_repo -eq 1 ]]; then
      # Recover missing files
-     for missing_file in ${missing_files[@]}; do
-       printf "\e[32m=>\e[0m Reverting missing file \e[34m[$missing_files]\e[0m\n"
-       git checkout HEAD -- $missing_file 
+     for missing_file in "${missing_files[@]}"; do
+       printf "\e[32m=>\e[0m Reverting missing file \e[34m[%s]\e[0m\n" "$missing_file"
+       git checkout HEAD -- "$missing_file" 
      done
    else
      # Fech full repo in temp directory
      SCRIPT_DIR=$INSTALL_DIR
      BASH_MAIN="$SCRIPT_DIR/src/bash";
      printf "\e[32m=>\e[0m Downloading resources\e[0m\n"
-     git clone $DOTFILES_REPO $INSTALL_DIR &>/dev/null
+     git clone $DOTFILES_REPO "$INSTALL_DIR" &>/dev/null
    fi
 }
 
@@ -78,6 +77,25 @@ function cleanup() {
   fi
 }
 
+#######################################
+# Displays script syntax help
+#######################################
+function show_help() {
+	printf "Payball's Dotfiles automated installer\n\n"
+  printf "Usage : %s <OPTIONS>\n" basename "$0"
+	printf "where OPTIONS are :\n"
+	printf "\t-v             : enables verbose mode"
+	printf "\t-V|--version   : displays version"
+	printf "\t-h|--help      : show this help\n"
+}
+
+#######################################
+# Displays script version
+#######################################
+function show_version() {
+  printf "%s\n" $VERSION
+}
+
 ########### MAIN ################
 
 
@@ -87,7 +105,7 @@ PARAMS=""
 # Parse options
 while (( "$#" )); do
 	case "$1" in
-		--help)
+		-h|--help)
 			show_help;
 			exit 0;
 			;;
