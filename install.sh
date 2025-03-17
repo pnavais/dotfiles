@@ -84,8 +84,9 @@ function cleanup() {
 # Displays script syntax help
 #######################################
 function show_help() {
-  printf "${YELLOW}Payball's Dotfiles${NC} automated installer\n\n"
-  printf "Usage : %s <OPTIONS>\n" basename "$0"
+  printf "\e[33mPayball's Dotfiles\e[0m automated installer\n"
+  printf "%s <%s>, %s\n\n" "$AUTHOR" "$EMAIL" "$YEAR"
+  printf "Usage : %s <OPTIONS>\n" $(basename "$0")
   printf "where OPTIONS are :\n"
   printf "\t-v             : enables verbose mode\n"
   printf "\t-V|--version   : displays version\n"
