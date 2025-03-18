@@ -11,12 +11,12 @@ M.base46 = {
 
   hl_override = {
     CursorLine = { bg = "one_bg"},
-    DiagnosticError = { undercurl = true },
-    DiagnosticWarn = { undercurl = true },
+    DiagnosticError = { undercurl=true },
+    DiagnosticWarn = { undercurl=true },
     Visual = { bg = "one_bg3" },
     Comment = { italic = true },
     ["@comment"] = { italic = true },
-  },
+    },
 }
 
 -- M.nvdash = { load_on_startup = true }
