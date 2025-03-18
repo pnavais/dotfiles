@@ -10,6 +10,7 @@ map("n", "<leader>q", ":wq<CR>", { desc = "Saves and quits current buffer", nore
 map("n", "<leader>z", ":qa!<CR>", { desc = "Saves and quits current buffer", noremap = true, silent = true })
 map("n", "<leader>cc", ":set cursorline!<CR>", { desc = "Toggles cursorline", noremap = true, silent = true })
 map("n", "<leader>tt", "<cmd>ToggleTheme<CR>", { desc = "Toggles between dark/light themes", noremap = true, silent = true })
+map("n", "<leader>aa", "<cmd>Trouble diagnostics toggle<CR>", { desc = "Toggles trouble diagnostics pane", noremap = true, silent = true })
 
 -- Beginning of line
 map("n", "<C-a>", "^", { desc = "Go to first non-blank character of line" })

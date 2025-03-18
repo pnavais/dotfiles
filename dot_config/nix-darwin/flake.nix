@@ -66,6 +66,7 @@
           pkgs.iconv
           pkgs.jq
           pkgs.kitty
+          pkgs.lazydocker
           pkgs.lazygit
           pkgs.lsd
           pkgs.macchina
@@ -82,6 +83,8 @@
           pkgs.procps
           pkgs.procs
           pkgs.ripgrep
+          pkgs.shellcheck
+          pkgs.shfmt
           pkgs.silver-searcher
           pkgs.starship
           pkgs.tldr
@@ -118,6 +121,7 @@
             "monitorcontrol"
             "orbstack"
             "rectangle"
+            "rustdesk"
             "spotify"
             "warp"
             "zed"

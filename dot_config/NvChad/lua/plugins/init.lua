@@ -1,6 +1,7 @@
 return {
   {
     "stevearc/conform.nvim",
+    event = "BufReadPost", -- Load on file opened
     -- event = 'BufWritePre', -- uncomment for format on save
     opts = require "configs.conform",
   },
@@ -43,6 +44,17 @@ return {
     config = function()
       vim.g.matchup_matchparen_offscreen = { method = "popup" }
     end,
+  },
+
+  {
+    "folke/trouble.nvim",
+    cmd = { "Trouble" },
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+      "folke/todo-comments.nvim",
+    },
+    opts = {},
+    lazy = false,
   },
 
   {
