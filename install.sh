@@ -9,7 +9,7 @@
 #########
 INSTALL_DIR=$(mktemp -d -u --suffix dotfiles.tmp)
 [[ -n "${BASH_SOURCE[0]}" ]] && SCRIPT_DIR=$(
-  cd "$(dirname ${BASH_SOURCE[0]})"
+  cd "$(dirname "${BASH_SOURCE[0]}")"
   pwd
 ) || SCRIPT_DIR=$INSTALL_DIR
 BASH_MAIN="$SCRIPT_DIR/src/bash"
@@ -86,7 +86,7 @@ function cleanup() {
 function show_help() {
   printf "\e[33mPayball's Dotfiles\e[0m automated installer\n"
   printf "%s <%s>, %s\n\n" "$AUTHOR" "$EMAIL" "$YEAR"
-  printf "Usage : %s <OPTIONS>\n" $(basename "$0")
+  printf "Usage : %s <OPTIONS>\n" "$(basename "$0")"
   printf "where OPTIONS are :\n"
   printf "\t-v             : enables verbose mode\n"
   printf "\t-V|--version   : displays version\n"
@@ -134,14 +134,18 @@ done
 # set positional arguments in their proper place
 eval set -- "$PARAMS"
 
-[[ $VERBOSE -eq 0 ]] && export IO_REDIR="&> /dev/null" || export IO_REDIR=""
+if [[ $VERBOSE -eq 0 ]]; then
+    export IO_REDIR="&> /dev/null"
+else
+    export IO_REDIR=""
+fi
 
 checkPrerequisites
 
 # Imports
 ##########
-source $BASH_MAIN/bash_common.sh
-source $BASH_MAIN/bash_deps.sh
+source "$BASH_MAIN/bash_common.sh"
+source "$BASH_MAIN/bash_deps.sh"
 
 trap 'cleanup; ctrl_c;' INT
 
@@ -151,7 +155,7 @@ checkSudo
 showSection 'Environment preparation'
 
 if isOSX; then
-  $SCRIPT_DIR/src/system/osx/install.sh
+  "$SCRIPT_DIR/src/system/osx/install.sh"
 elif isWSL; then
   printf "TODO: WSL installation pending"
 elif isLinux; then
@@ -161,10 +165,8 @@ else
 fi
 
 # Perform specific tools post-install config
-OLD_IFS=$IFS
-IFS=$'\n'
-for config in $(find $SCRIPT_DIR/ -name "*-config.sh"); do
-  source $config
+find "$SCRIPT_DIR/" -name "*-config.sh" | while IFS= read -r config; do
+  source "$config"
 done
 
 addInstallNote "\nInstallation finished."
