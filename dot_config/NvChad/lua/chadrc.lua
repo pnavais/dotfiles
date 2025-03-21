@@ -1,22 +1,24 @@
--- This file needs to have same structure as nvconfig.lua 
+-- This file needs to have same structure as nvconfig.lua
 -- https://github.com/NvChad/ui/blob/v3.0/lua/nvconfig.lua
--- Please read that file to know all available options :( 
+-- Please read that file to know all available options :(
 
 ---@type ChadrcConfig
 local M = {}
 
 M.base46 = {
-	theme = "catppuccin",
+  theme = "catppuccin",
   theme_toggle = { "catppuccin", "gruvbox_light" },
 
   hl_override = {
-    CursorLine = { bg = "one_bg"},
-    DiagnosticError = { undercurl=true },
-    DiagnosticWarn = { undercurl=true },
+    CursorLine = { bg = "one_bg" },
     Visual = { bg = "one_bg3" },
     Comment = { italic = true },
     ["@comment"] = { italic = true },
-    },
+  },
+  hl_add = {
+    DiagnosticUnderlineWarn = { fg = "yellow", undercurl = true },
+    DiagnosticUnderlineError = { fg = "red", undercurl = true },
+  },
 }
 
 -- M.nvdash = { load_on_startup = true }
