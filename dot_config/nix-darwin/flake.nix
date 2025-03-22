@@ -6,8 +6,7 @@
     nix-darwin.url = "github:LnL7/nix-darwin/master";
     mac-app-util.url = "github:hraban/mac-app-util";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-    nix-homebrew.url = "git+https://github.com/zhaofengli/nix-homebrew?ref=refs/pull/71/merge";
-    #nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
     homebrew-core = {
       url = "github:homebrew/homebrew-core";
       flake = false;
@@ -66,6 +65,7 @@
           pkgs.hyperfine
           pkgs.iconv
           pkgs.jq
+          pkgs.just
           pkgs.kitty
           pkgs.lazydocker
           pkgs.lazygit
