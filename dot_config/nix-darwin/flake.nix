@@ -65,7 +65,6 @@
           pkgs.hyperfine
           pkgs.iconv
           pkgs.jq
-          pkgs.just
           pkgs.kitty
           pkgs.lazydocker
           pkgs.lazygit
