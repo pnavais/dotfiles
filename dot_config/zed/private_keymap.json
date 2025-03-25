@@ -24,7 +24,11 @@
     "bindings": {
       "shift-tab": "pane::ActivatePreviousItem",
       "tab": "pane::ActivateNextItem",
-      "ctrl-w": "pane::CloseActiveItem"
+      "ctrl-w": "pane::CloseActiveItem",
+      "f2": "editor::GoToDiagnostic",
+      "shift-f2": "editor::GoToPreviousDiagnostic",
+      "alt-up": "vim::PreviousMethodStart",
+      "alt-down": "vim::NextMethodStart"
       // "shift-y": ["workspace::SendKeystrokes", "y $"] // Use neovim's yank behavior: yank to end of line.
     }
   }
