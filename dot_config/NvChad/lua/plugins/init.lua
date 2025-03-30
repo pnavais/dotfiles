@@ -59,14 +59,18 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter",
-    -- 	opts = {
-    -- 		ensure_installed = {
-    -- 			"vim", "lua", "vimdoc",
-    --      "html", "css"
-    -- 		},
-    -- 	},
+    opts = {
+      ensure_installed = {
+        "vim", "lua", "vimdoc",
+        "html", "css", "toml",
+      },
+    },
     matchup = {
       enable = true,
     },
+    config = function(_, opts)
+      require("nvim-treesitter.configs").setup(opts)
+      require("configs.treesitter")
+    end,
   },
 }
