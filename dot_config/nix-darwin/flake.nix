@@ -113,6 +113,7 @@
             "bartender"
             "betterdisplay"
             "brave-browser"
+            "cursor"
             "doppler"
             "firefox"
             "fliqlo"
@@ -158,12 +159,13 @@
           pkgs.nerd-fonts.caskaydia-mono
           pkgs.nerd-fonts.code-new-roman
           pkgs.nerd-fonts.departure-mono
-          pkgs.nerd-fonts.jetbrains-mono
           pkgs.nerd-fonts.iosevka
+          pkgs.nerd-fonts.jetbrains-mono
           pkgs.nerd-fonts.lilex
           pkgs.nerd-fonts.martian-mono
           pkgs.nerd-fonts.meslo-lg
           pkgs.nerd-fonts.monaspace
+          pkgs.nerd-fonts.zed-mono
 
           # Specific Noto fonts
           (pkgs.noto-fonts.override {

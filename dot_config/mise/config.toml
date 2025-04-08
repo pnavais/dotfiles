@@ -1,4 +1,5 @@
 [tools]
+black = "latest"
 go = "latest"
 gradle = "latest"
 java = "corretto-23.0.2.7.1"
