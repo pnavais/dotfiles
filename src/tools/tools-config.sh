@@ -49,8 +49,13 @@ DELTA_THEMES_DIR=${XDG_CONFIG_HOME:-~/.config}/delta
 pad "Fetching $(ansi --blue Delta) themes"
 if [[ ! -d "${DELTA_THEMES_DIR}" ]]; then
   mkdir -p ${DELTA_THEMES_DIR}
-  DELTA_THEMES_CMD="curl -o ${DELTA_THEMES_DIR}/themes.gitconfig -sfL \"https://raw.githubusercontent.com/dandavison/delta/master/themes.gitconfig\" $IOREDIR"
+  DELTA_THEMES_CMD="curl -o ${DELTA_THEMES_DIR}/themes.gitconfig -sfL \"https://raw.githubusercontent.com/dandavison/delta/master/themes.gitconfig\" $IO_REDIR"
   executeCmd "${DELTA_THEMES_CMD}"
 else
   showResult 0 "(Skipped)"
 fi
+
+# Install symlink to cursor config files
+pad "Creating $(ansi --blue cursor) symlinks"
+CURSOR_LINKS_CMD="ln -fs ~/.config/Cursor/User/*.json ~/Library/Application\ Support/Cursor/User/ $IO_REDIR"
+executeCmd "${CURSOR_LINKS_CMD}"
