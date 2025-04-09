@@ -1,0 +1,10 @@
+{
+    "window.commandCenter": true,
+    "editor.fontSize": 14,
+    "editor.fontFamily": "JetBrainsMono Nerd Font,ZedMono Nerd Font",
+    "window.autoDetectColorScheme": true,
+    "workbench.preferredLightColorTheme": "Solarized Light",
+    "rust-analyzer.cargo.features": [
+        "fetcher"
+    ]
+}
