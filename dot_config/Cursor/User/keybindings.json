@@ -4,10 +4,7 @@
         "key": "cmd+i",
         "command": "composerMode.agent"
     },
-    {
-        "key": ", ,",
-        "command": "workbench.action.files.save"
-    },
+
     {
         "key": "cmd+s",
         "command": "-workbench.action.files.save"
