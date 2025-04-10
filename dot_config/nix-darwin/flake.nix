@@ -126,9 +126,14 @@
             "keka"
             "monitorcontrol"
             "orbstack"
+            "qlmarkdown"
             "rectangle"
             "rustdesk"
             "spotify"
+            {
+              name = "syntax-highlight";
+              args = { no_quarantine = true; }; # Converts to --no-quarantine
+            }
             "warp"
             "zed"
           ];
