@@ -1,60 +1,86 @@
-[colors.bright]
-black = "#70A99F"
-blue = "#AA99FF"
-cyan = "#99FFEE"
-green = "#A2FF99"
-magenta = "#FF99CC"
-red = "#FFAA99"
-white = "#FFFFFF"
-yellow = "#FFFF99"
+#  Dracula Pro Blade
+#  ┌─┐┬  ┌─┐┌─┐┬─┐┬┌┬┐┌┬┐┬ ┬
+#  ├─┤│  ├─┤│  ├┬┘│ │  │ └┬┘
+#  ┴ ┴┴─┘┴ ┴└─┘┴└─┴ ┴  ┴  ┴ 
+#  urrick hunt
+
+#[colors]
+[colors.primary]
+background = "#212C2A"           # &Background
+foreground = "#F8F8F2"           # &Foreground
+dim_foreground = "#C6C6C2"       # &AnsiColor27
+bright_foreground = "#FFFFFF"    # &AnsiColor15
 
 [colors.cursor]
-cursor = "CellForeground"
-text = "CellBackground"
-
-[colors.footer_bar]
-background = "#212C2A"
-foreground = "#F8F8F2"
-
-[colors.hints.end]
-background = "#212C2A"
-foreground = "#FFFF80"
-
-[colors.hints.start]
-background = "#FFFF80"
-foreground = "#212C2A"
-
-[colors.line_indicator]
-background = "None"
-foreground = "None"
-
-[colors.normal]
-black = "#70A99F"
-blue = "#9580FF"
-cyan = "#80FFEA"
-green = "#8AFF80"
-magenta = "#FF80BF"
-red = "#FF9580"
-white = "#F8F8F2"
-yellow = "#FFFF80"
-
-[colors.primary]
-background = "#212C2A"
-bright_foreground = "#FFFFFF"
-foreground = "#F8F8F2"
-
-[colors.search.focused_match]
-background = "#FFCA80"
-foreground = "#415854"
-
-[colors.search.matches]
-background = "#8AFF80"
-foreground = "#415854"
-
-[colors.selection]
-background = "#415854"
-text = "CellForeground"
+text = "CellBackground"          # &Background
+cursor = "#70A99F"               # &Comment
 
 [colors.vi_mode_cursor]
-cursor = "CellForeground"
-text = "CellBackground"
+text = "CellBackground"          # &Background
+cursor = "CellForeground"        # &Foreground
+
+[colors.search.matches]
+foreground = "#415854"           # &Selection
+background = "#8AFF80"           # &AnsiColor2
+
+[colors.search.focused_match]
+foreground = "#415854"           # &Selection
+background = "#FFCA80"           # &Orange
+
+[colors.hints.start]
+foreground = "#212C2A"           # &Background
+background = "#FFFF80"           # &AnsiColor3
+
+[colors.hints.end]
+foreground = "#FFFF80"           # &AnsiColor3
+background = "#212C2A"           # &Background
+
+[colors.line_indicator]
+foreground = "None"
+background = "None"
+
+[colors.footer_bar]
+foreground = "#212C2A"           # &Background
+background = "#70A99F"           # &Comment
+
+[colors.selection]
+text = "CellForeground"          # &Foreground
+background = "#415854"           # &Selection
+
+[colors.normal]
+black = "#212C2A"                # &AnsiColor0
+red = "#FF9580"                  # &AnsiColor1
+green = "#8AFF80"                # &AnsiColor2
+yellow = "#FFFF80"               # &AnsiColor3
+blue = "#9580FF"                 # &AnsiColor4
+magenta = "#FF80BF"              # &AnsiColor5
+cyan = "#80FFEA"                 # &AnsiColor6
+white = "#F8F8F2"                # &AnsiColor7
+
+[colors.bright]
+black = "#4C6762"                # &AnsiColor8
+red = "#FFAA99"                  # &AnsiColor9
+green = "#A2FF99"                # &AnsiColor10
+yellow = "#FFFF99"               # &AnsiColor11
+blue = "#AA99FF"                 # &AnsiColor12
+magenta = "#FF99CC"              # &AnsiColor13
+cyan = "#99FFEE"                 # &AnsiColor14
+white = "#FFFFFF"                # &AnsiColor15
+
+[colors.dim]
+black = "#1A2322"                # &AnsiColor20
+red = "#CC7766"                  # &AnsiColor21
+green = "#6ECC66"                # &AnsiColor22
+yellow = "#CCCC66"               # &AnsiColor23
+blue = "#7766CC"                 # &AnsiColor24
+magenta = "#CC6699"              # &AnsiColor25
+cyan = "#66CCBB"                 # &AnsiColor26
+white = "#C6C6C2"                # &AnsiColor27
+
+[[colors.indexed_colors]]
+index = 16
+color = "#FFCA80"                # &Orange
+
+[[colors.indexed_colors]]
+index = 17
+color = "#E67070"                # &FunctionalRed
