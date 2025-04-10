@@ -8,5 +8,9 @@
     {
         "key": "cmd+s",
         "command": "-workbench.action.files.save"
+    },
+    {
+      "key": "cmd+ctrl+h",
+      "command": "settings.cycle.inlayHints"
     }
 ]

@@ -45,7 +45,7 @@
   "editor.fontSize": 14,
   "editor.fontFamily": "JetBrainsMono Nerd Font,ZedMono Nerd Font",
   "window.autoDetectColorScheme": true,
-  "workbench.preferredLightColorTheme": "Solarized Light",
+  "workbench.preferredLightColorTheme": "Atom One Light",
   "rust-analyzer.cargo.features": ["fetcher"],
   "vim.normalModeKeyBindingsNonRecursive": [
     {
@@ -75,5 +75,24 @@
   ],
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "workbench.preferredDarkColorTheme": "Catppuccin Frappé",
+  "editor.inlayHints.enabled": "offUnlessPressed",
+  "settings.cycle": [
+    {
+      "id": "inlayHints",
+      "overrideWorkspaceSettings": false,
+      "values": [
+        {
+          "editor.inlayHints.enabled": "off"
+        },
+        {
+          "editor.inlayHints.enabled": "on"
+        },
+        {
+          "editor.inlayHints.enabled": "offUnlessPressed"
+        }
+      ]
+    }
+  ]
 }
