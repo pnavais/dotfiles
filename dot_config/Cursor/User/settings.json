@@ -46,7 +46,7 @@
   "editor.fontFamily": "JetBrainsMono Nerd Font,ZedMono Nerd Font",
   "window.autoDetectColorScheme": true,
   "workbench.preferredLightColorTheme": "Atom One Light",
-  "rust-analyzer.cargo.features": ["fetcher"],
+  "rust-analyzer.cargo.features": ["fetcher", "display", "minimal"],
   "vim.normalModeKeyBindingsNonRecursive": [
     {
       "before": ["=", "="],
