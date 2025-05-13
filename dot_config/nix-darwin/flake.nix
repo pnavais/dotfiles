@@ -6,7 +6,10 @@
     nix-darwin.url = "github:LnL7/nix-darwin/master";
     mac-app-util.url = "github:hraban/mac-app-util";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+    nix-homebrew = {
+      url = "github:zhaofengli/nix-homebrew";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     homebrew-core = {
       url = "github:homebrew/homebrew-core";
       flake = false;
@@ -15,14 +18,10 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
-    homebrew-bundle = {
-      url = "github:homebrew/homebrew-bundle";
-      flake = false;
-    };
   };
 
   outputs = { self, nix-darwin, mac-app-util, nix-homebrew, homebrew-core
-    , homebrew-cask, homebrew-bundle, ... }:
+    , homebrew-cask, ... }:
     let
       configuration = { pkgs, config, ... }: {
 
@@ -216,13 +215,12 @@
               taps = {
                 "homebrew/homebrew-core" = homebrew-core;
                 "homebrew/homebrew-cask" = homebrew-cask;
-                "homebrew/homebrew-bundle" = homebrew-bundle;
               };
 
               # Optional: Enable fully-declarative tap management
               #
               # With mutableTaps disabled, taps can no longer be added imperatively with `brew tap`.
-              mutableTaps = true;
+              mutableTaps = false;
             };
           }
           mac-app-util.darwinModules.default

@@ -11,6 +11,7 @@
     "edit_prediction_provider": "zed"
   },
   "agent": {
+    "always_allow_tool_actions": true,
     "default_model": {
       "provider": "zed.dev",
       "model": "claude-3-7-sonnet-latest"
@@ -32,6 +33,14 @@
         "formatting": {
           "command": ["nixfmt"]
         }
+      },
+      "binary": {
+        "path": "nil"
+      },
+      "settings": {
+        "diagnostics": {
+          "enabled": true
+        }
       }
     },
     "rust-analyzer": {
@@ -44,6 +53,13 @@
           "workspace": true
         }
       }
+    }
+  },
+  "languages": {
+    "Nix": {
+      "enable_language_server": true,
+      "language_servers": ["nil", "..."],
+      "format_on_save": "language_server"
     }
   }
 }
