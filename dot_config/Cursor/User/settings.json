@@ -47,6 +47,8 @@
   "window.autoDetectColorScheme": true,
   "workbench.preferredLightColorTheme": "Atom One Light",
   "rust-analyzer.cargo.features": ["fetcher", "display", "minimal"],
+  "rust-analyzer.restartServerOnConfigChange": true,
+  "rust-analyzer.runnables.extraEnv": { "PATH": "${env:HOME}/.cargo/bin:${env:PATH}" },
   "vim.normalModeKeyBindingsNonRecursive": [
     {
       "before": ["=", "="],
