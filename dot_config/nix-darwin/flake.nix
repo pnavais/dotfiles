@@ -79,6 +79,7 @@
           pkgs.openssh
           pkgs.openssl
           pkgs.pastel
+          pkgs.pkg-config
           pkgs.procps
           pkgs.procs
           pkgs.ripgrep
@@ -97,6 +98,7 @@
 
         environment.variables = {
           ANTIDOTE_SRC = "${pkgs.antidote}/share/antidote";
+          #PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
         };
 
         # Brew packages
