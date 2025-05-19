@@ -152,9 +152,12 @@
         };
 
         # Mac customizations
-        system.defaults = {
-          NSGlobalDomain.KeyRepeat = 2;
-          NSGlobalDomain.InitialKeyRepeat = 15;
+        system = {
+          primaryUser = "pnavais";
+          defaults = {
+            NSGlobalDomain.KeyRepeat = 2;
+            NSGlobalDomain.InitialKeyRepeat = 15;
+          };
         };
 
         # Fonts to be installed

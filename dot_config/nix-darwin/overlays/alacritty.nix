@@ -1,7 +1,5 @@
 final: prev: {
   alacritty = prev.alacritty.overrideAttrs (oldAttrs: rec {
-    # Keep the same version as the original package
-    inherit (oldAttrs) version;
 
     # Add the custom crossfont source
     crossfontSrc = prev.fetchFromGitHub {
