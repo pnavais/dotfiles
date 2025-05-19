@@ -153,7 +153,7 @@
 
         # Mac customizations
         system = {
-          primaryUser = "pnavais";
+          primaryUser = "{{ .chezmoi.username }}";
           defaults = {
             NSGlobalDomain.KeyRepeat = 2;
             NSGlobalDomain.InitialKeyRepeat = 15;
@@ -212,7 +212,7 @@
               enableRosetta = true;
 
               # User owning the Homebrew prefix
-              user = "pnavais";
+              user = "{{ .chezmoi.username }}";
 
               # Optional: Declarative tap management
               taps = {
