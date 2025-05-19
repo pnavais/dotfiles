@@ -105,5 +105,5 @@ fi
 
 showSubSection "Installing dependencies"
 pad "Building $(ansi --green nix-darwin) system"
-NIX_DARWIN_INSTALL_CMD="darwin-rebuild switch $IO_REDIR"
+NIX_DARWIN_INSTALL_CMD="sudo darwin-rebuild switch $IO_REDIR"
 executeCmd "${NIX_DARWIN_INSTALL_CMD}"
