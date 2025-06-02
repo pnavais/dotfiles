@@ -61,6 +61,9 @@ alias ls='lsd --group-dirs=first'
 # ZSH misc
 # --------
 
+# XDG setup (used by Lazygit)
+export XDG_CONFIG_HOME="$HOME/.config"
+
 # Load colors first
 autoload -Uz colors && colors
 
