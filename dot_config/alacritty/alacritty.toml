@@ -19,7 +19,7 @@ x = 10
 y = 10
 
 [window]
-option_as_alt = "OnlyLeft"
+option_as_alt = "None"
 
 [cursor]
 style = { shape = "Block", blinking = "Always" }
