@@ -108,7 +108,7 @@ function setup_nvims() {
     done
 }
 
-# Yazi shell wrapper providing the ability to change the current working directory when existing Yazi
+# Yazi shell wrapper providing the ability to change the current working directory when exiting Yazi
 function y() {
         local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
         yazi "$@" --cwd-file="$tmp"
