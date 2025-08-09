@@ -6,10 +6,7 @@
     nix-darwin.url = "github:LnL7/nix-darwin/master";
     mac-app-util.url = "github:hraban/mac-app-util";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-    nix-homebrew = {
-      url = "github:zhaofengli/nix-homebrew";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
     homebrew-core = {
       url = "github:homebrew/homebrew-core";
       flake = false;
@@ -38,7 +35,7 @@
           pkgs.antidote
           pkgs.ast-grep
           pkgs.bat
-          pkgs.bitwarden-cli
+          # pkgs.bitwarden-cli
           pkgs.boxes
           pkgs.chezmoi
           pkgs.choose
@@ -124,6 +121,7 @@
             "jetbrains-toolbox"
             "keka"
             "monitorcontrol"
+            #{ name = "orbstack"; greedy = true; }
             "orbstack"
             "qlmarkdown"
             "rectangle"
@@ -149,6 +147,8 @@
             upgrade = true;
           };
           global = { brewfile = true; };
+          # Enable forcing updates for non latest casks
+          #greedyCasks = true;
         };
 
         # Mac customizations
