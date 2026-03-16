@@ -2,7 +2,7 @@
 black = "latest"
 go = "latest"
 gradle = "latest"
-java = "corretto-23.0.2.7.1"
+java = "corretto-25.0.2.10.1"
 just = "latest"
 lua = "latest"
 maven = "latest"
