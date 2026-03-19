@@ -102,7 +102,7 @@
         homebrew = {
           taps = builtins.attrNames config.nix-homebrew.taps;
           enable = true;
-          brews = [ "displayplacer" ];
+          brews = [ "displayplacer" "mole" ];
           casks = [
             "alfred"
             "arc"
@@ -121,7 +121,6 @@
             "jetbrains-toolbox"
             "keka"
             "mailspring"
-            "mole"
             "monitorcontrol"
             #{ name = "orbstack"; greedy = true; }
             "ollama-app"
