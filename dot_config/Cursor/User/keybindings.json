@@ -11,5 +11,10 @@
     {
       "key": "cmd+ctrl+h",
       "command": "settings.cycle.inlayHints"
+    },
+    {
+        "key": "alt+cmd+s",
+        "command": "workbench.action.toggleUnifiedSidebarFromKeyboard",
+        "when": "cursor.agentIdeUnification.enabled == true && !isAuxiliaryWindowFocusedContext"
     }
 ]

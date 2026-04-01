@@ -1,34 +1,34 @@
 {
   "editor.formatOnSave": true,
   "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[css]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[rust]": {
     "editor.defaultFormatter": "rust-lang.rust-analyzer",
     "editor.formatOnSave": true,
-    "editor.formatOnType": true
+    "editor.formatOnType": true,
   },
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
   },
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "always"
+    "source.fixAll.eslint": "always",
   },
   "editor.rulers": [100],
   "files.trimTrailingWhitespace": true,
@@ -39,7 +39,7 @@
   "vim.useSystemClipboard": true,
   "vim.handleKeys": {
     "<C-a>": false,
-    "<C-f>": false
+    "<C-f>": false,
   },
   "window.commandCenter": true,
   "editor.fontSize": 14,
@@ -55,14 +55,14 @@
       "commands": [
         {
           "command": "editor.action.reindentlines",
-          "when": "editorTextFocus && !editorReadonly"
-        }
-      ]
+          "when": "editorTextFocus && !editorReadonly",
+        },
+      ],
     },
     {
       "before": [",", ","],
-      "commands": ["workbench.action.files.save"]
-    }
+      "commands": ["workbench.action.files.save"],
+    },
   ],
   "vim.visualModeKeyBindingsNonRecursive": [
     {
@@ -70,13 +70,13 @@
       "commands": [
         {
           "command": "editor.action.reindentlines",
-          "when": "editorTextFocus && !editorReadonly"
-        }
-      ]
-    }
+          "when": "editorTextFocus && !editorReadonly",
+        },
+      ],
+    },
   ],
   "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "workbench.preferredDarkColorTheme": "Catppuccin Frappé",
   "editor.inlayHints.enabled": "offUnlessPressed",
@@ -86,16 +86,30 @@
       "overrideWorkspaceSettings": false,
       "values": [
         {
-          "editor.inlayHints.enabled": "off"
+          "editor.inlayHints.enabled": "off",
         },
         {
-          "editor.inlayHints.enabled": "on"
+          "editor.inlayHints.enabled": "on",
         },
         {
-          "editor.inlayHints.enabled": "offUnlessPressed"
-        }
-      ]
-    }
+          "editor.inlayHints.enabled": "offUnlessPressed",
+        },
+      ],
+    },
   ],
-  "git.confirmSync": false
+  "git.confirmSync": false,
+  "terminal.integrated.shellIntegration.enabled": true,
+  "terminal.integrated.profiles.osx": {
+    "zsh": {
+      "path": "/run/current-system/sw/bin/zsh",
+      "args": ["-l"],
+    },
+    "bash": null,
+  },
+  "terminal.integrated.automationProfile.osx": {
+    "path": "/run/current-system/sw/bin/zsh",
+    "args": ["-l"],
+  },
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "terminal.integrated.gpuAcceleration": "off",
 }
