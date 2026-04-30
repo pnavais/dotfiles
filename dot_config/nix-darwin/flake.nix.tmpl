@@ -25,7 +25,7 @@
     };
   };
 
-  outputs = { self, nix-darwin, mac-app-util, nix-homebrew, homebrew-core
+  outputs = { self, nix-darwin, mac-app-util, nix-homebrew, homebrew-core, homebrew-jundot-omlx, homebrew-omlx-cask
     , homebrew-cask, ... }:
     let
       configuration = { pkgs, config, ... }: {
@@ -110,7 +110,7 @@
         homebrew = {
           taps = builtins.attrNames config.nix-homebrew.taps;
           enable = true;
-          brews = [ "displayplacer" "mole" ];
+          brews = [ "displayplacer" "mole" "omxl" ];
           casks = [
             "alfred"
             "arc"
@@ -228,6 +228,8 @@
               taps = {
                 "homebrew/homebrew-core" = homebrew-core;
                 "homebrew/homebrew-cask" = homebrew-cask;
+		"homebrew/jundot-omlx" = homebrew-jundot-omlx;
+                "homebrew/homebrew-pnavais-omlx" = homebrew-omlx-cask;
               };
 
               # Optional: Enable fully-declarative tap management
