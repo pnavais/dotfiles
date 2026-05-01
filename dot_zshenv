@@ -3,3 +3,8 @@
 export EDITOR=nvim
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
+
+# Activate mise when running in Cursor
+if [[ -n "$CURSOR_AGENT" ]]; then
+  eval "$(mise activate)"
+fi
