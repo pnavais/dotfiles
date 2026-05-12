@@ -28,6 +28,18 @@
   outputs = { self, nix-darwin, mac-app-util, nix-homebrew, homebrew-core, homebrew-jundot-omlx, homebrew-omlx-cask
     , homebrew-cask, ... }:
     let
+  outputs = 
+  { 
+    self, 
+    nix-darwin, 
+    mac-app-util, 
+    nix-homebrew, 
+    homebrew-core, 
+    homebrew-cask, 
+    homebrew-omlx-cask,
+    homebrew-cask,
+    ... 
+  }:
       configuration = { pkgs, config, ... }: {
 
         # Allow non opensource apps
@@ -118,7 +130,7 @@
             "bartender"
             "betterdisplay"
             "brave-browser"
-	    "cleanshot"
+	          "cleanshot"
             "cursor"
             "doppler-app"
             "firefox"
@@ -132,9 +144,9 @@
             "keka"
             "mailspring"
             "monitorcontrol"
-            #{ name = "orbstack"; greedy = true; }
             "ollama-app"
-	    "omlx"
+            "omlx"
+            #{ name = "orbstack"; greedy = true; }
             "orbstack"
             "qlmarkdown"
             "rectangle"
@@ -231,7 +243,7 @@
               taps = {
                 "homebrew/homebrew-core" = homebrew-core;
                 "homebrew/homebrew-cask" = homebrew-cask;
-		"homebrew/homebrew-jundot-omlx" = homebrew-jundot-omlx;
+                "homebrew/homebrew-jundot-omlx" = homebrew-jundot-omlx;
                 "homebrew/homebrew-pnavais-omlx" = homebrew-omlx-cask;
               };
 
