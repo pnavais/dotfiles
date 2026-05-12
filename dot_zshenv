@@ -5,6 +5,11 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 # Activate mise when running in Cursor
-if [[ -n "$CURSOR_AGENT" ]]; then
-  eval "$(mise activate)"
+#if [[ -n "$CURSOR_AGENT" ]]; then
+#  eval "$(mise activate)"
+#fi
+
+#  Activate mise for non interactive shells
+if [[ $- != *i* ]]; then
+  eval "$(mise activate zsh)"
 fi
