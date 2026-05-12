@@ -2,7 +2,7 @@ return {
   {
     "stevearc/conform.nvim",
     event = "BufReadPost", -- Load on file opened
-    -- event = 'BufWritePre', -- uncomment for format on save
+    --event = 'BufWritePre', -- uncomment for format on save
     opts = require "configs.conform",
   },
 
@@ -68,9 +68,5 @@ return {
     matchup = {
       enable = true,
     },
-    config = function(_, opts)
-      require("nvim-treesitter.configs").setup(opts)
-      require("configs.treesitter")
-    end,
   },
 }
