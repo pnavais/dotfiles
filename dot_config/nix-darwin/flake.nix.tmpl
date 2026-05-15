@@ -108,6 +108,7 @@
             pkgs.tldr
             pkgs.tmux
             pkgs.toilet
+            pkgs.tree-sitter
             pkgs.vim
             pkgs.wget
             pkgs.yazi
@@ -126,6 +127,12 @@
             brews = [
               "displayplacer"
               "mole"
+              # Structured output needs xgrammar; this maps to `brew install omlx --with-grammar`
+              # (formula option only — not valid on the omlx *cask*).
+              {
+                name = "omlx";
+                args = [ "with-grammar" ];
+              }
             ];
             casks = [
               "alfred"
