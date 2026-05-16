@@ -23,6 +23,10 @@
       url = "github:pnavais/omlx-cask";
       flake = false;
     };
+    homebrew-aerion-cask = {
+      url = "github:pnavais/aerion-cask";
+      flake = false;
+    };
   };
 
   outputs =
@@ -35,6 +39,7 @@
       homebrew-cask,
       homebrew-jundot-omlx,
       homebrew-omlx-cask,
+      homebrew-aerion-cask,
       ...
     }:
     let
@@ -135,6 +140,7 @@
               }
             ];
             casks = [
+              "aerion"
               "alfred"
               "arc"
               "bartender"
@@ -152,7 +158,7 @@
               "iterm2"
               "jetbrains-toolbox"
               "keka"
-              "mailspring"
+              #"mailspring"
               "monitorcontrol"
               "ollama-app"
               "omlx"
@@ -264,6 +270,7 @@
                 "homebrew/homebrew-cask" = homebrew-cask;
                 "homebrew/homebrew-jundot-omlx" = homebrew-jundot-omlx;
                 "homebrew/homebrew-pnavais-omlx" = homebrew-omlx-cask;
+                "homebrew/homebrew-pnavais-aerion" = homebrew-aerion-cask;
               };
 
               # Optional: Enable fully-declarative tap management
