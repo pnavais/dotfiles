@@ -31,6 +31,10 @@
       url = "github:pnavais/aerion-cask";
       flake = false;
     };
+    homebrew-media-control = {
+      url = "github:ungive/media-control";
+      flake = false;
+    };
   };
 
   outputs =
@@ -45,6 +49,7 @@
       homebrew-mlx-serve,
       homebrew-omlx-cask,
       homebrew-aerion-cask,
+      homebrew-media-control,
       ...
     }:
     let
@@ -114,7 +119,6 @@
             pkgs.ripgrep
             pkgs.shellcheck
             pkgs.shfmt
-            pkgs.silver-searcher
             pkgs.starship
             pkgs.tldr
             pkgs.tmux
@@ -144,7 +148,9 @@
                 name = "homebrew/jundot-omlx/omlx";
                 args = [ "with-grammar" ];
               }
+              "media-control"
               "mlx-serve"
+              "the_silver_searcher"
             ];
             casks = [
               #"aerion"
@@ -155,13 +161,13 @@
               "brave-browser"
               "cleanshot"
               "cursor"
-              "doppler-app"
+              #"doppler-app"
               "firefox"
               "fliqlo"
               "ghostty"
               "google-chrome"
               "hammerspoon"
-              #"iina"
+              "iina"
               "iterm2"
               "jetbrains-toolbox"
               "keka"
@@ -190,6 +196,8 @@
             # Mac App Store apps
             masApps = {
               "Bitwarden" = 1352778147;
+              "Meta" = 558317092;
+              "Mp3tag" = 1532597159;
               "NaviBeat" = 6763518834;
               "Sleeve" = 1606145041;
               "Things 3" = 904280696;
@@ -283,6 +291,7 @@
                 "homebrew/homebrew-pnavais-omlx" = homebrew-omlx-cask;
                 "homebrew/homebrew-pnavais-aerion" = homebrew-aerion-cask;
                 "homebrew/homebrew-mlx-serve" = homebrew-mlx-serve;
+                "homebrew/homebrew-media-control" = homebrew-media-control;
               };
 
               # Optional: Enable fully-declarative tap management
