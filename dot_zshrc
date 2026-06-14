@@ -38,6 +38,7 @@ source ${zsh_plugins}.zsh
 alias cls='clear'
 alias ..='cd ..'
 alias cd..='cd ..'
+alias cal='gcal --starting-day=1'
 
 # Bat
 alias cat='bat --color=always'
