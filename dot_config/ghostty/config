@@ -22,4 +22,4 @@ cursor-style-blink = true
 cursor-style = block
 
 # Theme configuration
-theme = light:rose-pine-dawn,dark:catppuccin-mocha
+theme = light:rose-pine-dawn,dark:Catppuccin Mocha
