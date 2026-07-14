@@ -6,8 +6,8 @@ export LC_ALL=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 
 # Override omlx in the path with the custom launcher
-if [[ -x /usr/local/bin/omlx ]]; then
-  omlx() { /usr/local/bin/omlx "$@"; }
+if [[ -x /usr/local/bin/omlx-payball ]]; then
+  omlx() { /usr/local/bin/omlx-payball "$@"; }
 fi
 
 if [[ -n "$CURSOR_AGENT" ]] || [[ $- != *i* ]]; then
