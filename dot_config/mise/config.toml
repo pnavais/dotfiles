@@ -2,13 +2,16 @@
 black = "latest"
 go = "latest"
 gradle = "latest"
-java = "corretto-25.0.2.10.1"
+java = "corretto-25"
 just = "latest"
 lua = "latest"
 maven = "latest"
 node = "latest"
-python = "3.13.2"
+python = "3.14"
 ruff = "latest"
 rust = "latest"
 usage = "latest"
 uv = "latest"
+
+[settings]
+auto_update = true
