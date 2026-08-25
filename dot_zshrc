@@ -7,6 +7,11 @@
 # ZSH configuration, (c) Pablo Navais <pnavais@gmail.com> 2025
 # ------------------------------------------------------------
 
+# Local Path
+# ----------
+export PATH="$HOME/.local/bin:$PATH"
+
+
 # Antidote
 # --------
 
@@ -46,25 +51,36 @@ alias catn='command cat'
 alias catnl='bat --paging=never'
 
 # Eza
-alias le="eza -l --icons --git -a"
-alias lt="eza --tree --level=2 --long --icons --git"
-alias ltree="eza --tree --level=2  --icons --git"
-alias lse="eza --icons"
+alias ell="eza -l --git --icons=always --group-directories-first"
+alias elll="eza -la --sort=modified --reverse --git --icons=always --group-directories-first"
+alias eltime="eza -l --sort=modified --git --icons=always --group-directories-first"
+alias elrecursive="eza -lR --git --icons=always --group-directories-first"
+alias elt="eza --tree --level=2 --long --git --icons=always --group-directories-first"
 
 # LSD
-alias ll='lsd -lh --group-dirs=first'
-alias lll='lsd -ltrah --group-dirs=first'
+alias ll='lsd -lhg --group-dirs=first'
+alias lll='lsd -ltrahg --group-dirs=first'
 alias la='lsd -a --group-dirs=first'
 alias l='lsd --group-dirs=first'
-alias lla='lsd -lha --group-dirs=first'
-alias lsl="lsd --color=always -lhFA --group-dirs=first | less -R"
+alias lla='lsd -lhag --group-dirs=first'
+alias lsl="lsd --color=always -lhFAg --group-dirs=first | less -R"
 alias ls='lsd --group-dirs=first'
+alias l1='lsd -1 --group-dirs=first'
+alias ldot='lsd -A --group-dirs=first'
+alias lsize='lsd -lSg --group-dirs=first'
+alias ltime='lsd -ltg --group-dirs=first'
+alias lrecursive='lsd -lRg --group-dirs=first'
+alias lt='lsd --tree --depth=2 --long --git --group-dirs=first'
 
 # ZSH misc
 # --------
 
 # XDG setup (used by Lazygit)
 export XDG_CONFIG_HOME="$HOME/.config"
+
+# Export terminal size so child processes without a controlling tty
+# (e.g. delta spawned by `chezmoi diff`) can still detect the real width.
+export COLUMNS LINES
 
 # Load colors first
 autoload -Uz colors && colors
@@ -98,7 +114,6 @@ setopt hist_find_no_dups
 [[ $+commands[dircolors] ]] && eval "$(dircolors)"
 
 # Completion styling
-
 zstyle ':plugin:ez-compinit' 'use-cache' 'yes'
 zstyle ':plugin:ez-compinit' 'compstyle' 'zshzoo'
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
