@@ -19,7 +19,7 @@ x = 10
 y = 10
 
 [window]
-option_as_alt = "None"
+option_as_alt = "OnlyLeft"
 
 [cursor]
 style = { shape = "Block", blinking = "Always" }
@@ -27,7 +27,9 @@ style = { shape = "Block", blinking = "Always" }
 [keyboard]
 bindings = [
   { key = "Left",   mods = "Alt", chars = "\u001BB"},
-  { key = "Right",  mods = "Alt", chars = "\u001BF" } 
+  { key = "Right",  mods = "Alt", chars = "\u001BF" },
+  # Shift+Enter -> newline in Claude Code CLI (sends LF, same as Ctrl+J; passes tmux cleanly)
+  { key = "Return", mods = "Shift", chars = "\u000A" }
 ]
 
 [env]
