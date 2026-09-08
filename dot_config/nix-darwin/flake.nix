@@ -4,9 +4,11 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:LnL7/nix-darwin/master";
-    mac-app-util.url = "github:hraban/mac-app-util";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+    mac-app-util.url = "github:hraban/mac-app-util";
+    nix-homebrew = {
+      url = "github:zhaofengli/nix-homebrew";
+    };
     homebrew-core = {
       url = "github:homebrew/homebrew-core";
       flake = false;
@@ -35,6 +37,12 @@
       url = "github:ungive/media-control";
       flake = false;
     };
+    # Formula lives in the separate tap repo (brew install cormacrelf/tap/dark-notify),
+    # not in the dark-notify source tree.
+    homebrew-dark-notify = {
+      url = "github:cormacrelf/homebrew-tap";
+      flake = false;
+    };
   };
 
   outputs =
@@ -50,6 +58,7 @@
       homebrew-omlx-cask,
       homebrew-aerion-cask,
       homebrew-media-control,
+      homebrew-dark-notify,
       ...
     }:
     let
@@ -103,14 +112,12 @@
             pkgs.lsd
             pkgs.macchina
             pkgs.mas
-            pkgs.mise
             pkgs.neovim
             pkgs.nil
             pkgs.nixfmt
             pkgs.nixd
             pkgs.nmap
             pkgs.obsidian
-            pkgs.opencode
             pkgs.openssh
             pkgs.openssl
             pkgs.pastel
@@ -141,7 +148,13 @@
             taps = builtins.attrNames config.nix-homebrew.taps;
             enable = true;
             brews = [
+              "cormacrelf/tap/dark-notify"
               "displayplacer"
+              "gh"
+              "glab"
+              "media-control"
+              #"mise"
+              "mlx-serve"
               "mole"
               # Structured output needs xgrammar; this maps to `brew install omlx --with-grammar`
               # (formula option only — not valid on the omlx *cask*).
@@ -149,14 +162,12 @@
                 name = "homebrew/jundot-omlx/omlx";
                 args = [ "with-grammar" ];
               }
-              "media-control"
-              "mlx-serve"
               "the_silver_searcher"
             ];
             casks = [
               #"aerion"
               "alfred"
-              "arc"
+              #"arc"
               "bartender"
               "betterdisplay"
               "brave-browser"
@@ -179,6 +190,7 @@
               "omlx-app"
               #{ name = "orbstack"; greedy = true; }
               "orbstack"
+              "puremac"
               "qlmarkdown"
               "rectangle"
               #"rustdesk"
@@ -203,6 +215,7 @@
               "Sleeve" = 1606145041;
               "Things 3" = 904280696;
               "Tuneful" = 6739804295;
+              "Wallset" = 6789684479;
             };
             onActivation = {
               cleanup = "zap";
@@ -218,7 +231,7 @@
 
           # Mac customizations
           system = {
-            primaryUser = "{{ .chezmoi.username }}";
+            primaryUser = "pnavais";
             defaults = {
               NSGlobalDomain.KeyRepeat = 2;
               NSGlobalDomain.InitialKeyRepeat = 15;
@@ -282,7 +295,7 @@
               enableRosetta = true;
 
               # User owning the Homebrew prefix
-              user = "{{ .chezmoi.username }}";
+              user = "pnavais";
 
               # Optional: Declarative tap management
               taps = {
@@ -293,6 +306,7 @@
                 "homebrew/homebrew-pnavais-aerion" = homebrew-aerion-cask;
                 "homebrew/homebrew-mlx-serve" = homebrew-mlx-serve;
                 "homebrew/homebrew-media-control" = homebrew-media-control;
+                "cormacrelf/homebrew-tap" = homebrew-dark-notify;
               };
 
               # Optional: Enable fully-declarative tap management
