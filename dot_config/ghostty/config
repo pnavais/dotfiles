@@ -23,3 +23,19 @@ cursor-style = block
 
 # Theme configuration
 config-file = ?auto/theme.ghostty
+
+
+# Icon theme config for macos
+# Option 1 : Use a builtin option from : https://noahskelton.github.io/ghostty-icons/
+# Current ones : official|blueprint|chalkboard|glass|holographic|microchip|paper|retro|xray
+#macos-icon = official
+
+# Option 2 : Use the custo theme generator from : https://noahskelton.github.io/ghostty-icons/
+macos-icon = custom-style
+macos-icon-frame = plastic
+macos-icon-ghost-color = #ffffff
+macos-icon-screen-color = #b076e3,#7aa2f7
+
+# Option 3 : Use an external icon 
+#macos-icon = custom
+#macos-custom-icon = ~/Pictures/icons/Ghostty/catppuccin-mocha.icns
