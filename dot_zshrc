@@ -137,7 +137,7 @@ eval "$(starship init zsh)"
 
 # Mise
 # ----
-zsh-defer eval "$(mise activate zsh)"
+zsh-defer -c 'eval "$(mise activate zsh)"'
 
 # Shell integrations
 # ------------------
@@ -145,7 +145,7 @@ eval "$(fzf --zsh)"
 
 # Zoxide
 # ------
-zsh-defer eval "$(zoxide init zsh)"
+zsh-defer -c 'eval "$(zoxide init zsh)"'
 
 # Additional configs
 # ------------------
