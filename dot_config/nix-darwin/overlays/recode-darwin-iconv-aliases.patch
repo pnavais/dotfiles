@@ -1,0 +1,61 @@
+diff --git a/src/iconv.c b/src/iconv.c
+index a44fd8c..c96fed0 100644
+--- a/src/iconv.c
++++ b/src/iconv.c
+@@ -272,11 +272,18 @@ module_iconv (RECODE_OUTER outer)
+ 	  RECODE_ALIAS alias
+ 	    = recode_find_alias (outer, *cursor, ALIAS_FIND_AS_CHARSET);
+ 
+-	  /* If there is a charset contradiction, call recode_declare_alias
+-	     nevertheless, as the error processing will occur there.  */
+-	  if (!alias || alias->symbol->name != charset_name)
+-	    if (!recode_declare_alias (outer, *cursor, charset_name))
+-	      return false;
++	  if (!alias)
++	    {
++	      if (!recode_declare_alias (outer, *cursor, charset_name))
++		return false;
++	    }
++	  else if (alias->symbol->name != charset_name)
++	    {
++	      /* Some iconv implementations (notably macOS libiconv) list the
++		 same alias under more than one charset group — e.g.
++		 WINDOWS-874 appears with both CP1162 and CP874.  Keep the
++		 first binding instead of aborting initialization.  */
++	    }
+ 	}
+     }
+ 
+diff --git a/tables.py b/tables.py
+index 1d7bc9a..aecaade 100755
+--- a/tables.py
++++ b/tables.py
+@@ -468,6 +468,7 @@ class Iconv(Options):
+         libc = None
+         import os
+         names = []
++        seen = set()
+         for line in os.popen('iconv -l'):
+             if libc is None:
+                 libc = len(line.split('/')) == 3
+@@ -484,7 +485,19 @@ class Iconv(Options):
+                     if alias in canonical:
+                         alias = canonical[alias]
+                     aliases.append(alias)
+-                self.data.append((aliases[0], aliases[1:]))
++                # Prefer the first charset group for each alias name.  Some
++                # iconv implementations (macOS libiconv) repeat names across
++                # groups — e.g. WINDOWS-874 under both CP1162 and CP874 —
++                # which would otherwise make module_iconv abort.
++                filtered = []
++                for alias in aliases:
++                    key = alias.upper()
++                    if key in seen:
++                        continue
++                    seen.add(key)
++                    filtered.append(alias)
++                if filtered:
++                    self.data.append((filtered[0], filtered[1:]))
+ 
+     def complete(self, french):
+         def write_charset(format, charset):
