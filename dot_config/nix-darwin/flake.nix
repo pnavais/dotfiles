@@ -43,6 +43,10 @@
       url = "github:cormacrelf/homebrew-tap";
       flake = false;
     };
+    homebrew-chemaclass = {
+      url = "github:Chemaclass/homebrew-tap";
+      flake = false;
+    };
   };
 
   outputs =
@@ -59,6 +63,7 @@
       homebrew-aerion-cask,
       homebrew-media-control,
       homebrew-dark-notify,
+      homebrew-chemaclass,
       ...
     }:
     let
@@ -77,12 +82,14 @@
           environment.systemPackages = [
             pkgs.alacritty
             pkgs.antidote
+            pkgs.asciinema
             pkgs.ast-grep
             pkgs.bat
             pkgs.bitwarden-cli
             pkgs.boxes
             pkgs.chezmoi
             pkgs.choose
+            pkgs.cmake
             pkgs.cowsay
             pkgs.coreutils
             pkgs.curl
@@ -152,6 +159,9 @@
               "displayplacer"
               "gh"
               "glab"
+              "leaf-markdown-viewer"
+              "llvm"
+              "lld"
               "media-control"
               #"mise"
               "mlx-serve"
@@ -163,9 +173,13 @@
                 args = [ "with-grammar" ];
               }
               "the_silver_searcher"
+              # Splats an MSVC/Windows SDK sysroot for cross-compiling to Windows with
+              # clang-cl + lld-link (see shimback's cmake/windows-clang-cl.cmake).
+              "xwin"
             ];
             casks = [
               #"aerion"
+              "chemaclass/tap/agnostic-ai"
               "alfred"
               #"arc"
               "bartender"
@@ -307,6 +321,7 @@
                 "homebrew/homebrew-mlx-serve" = homebrew-mlx-serve;
                 "homebrew/homebrew-media-control" = homebrew-media-control;
                 "cormacrelf/homebrew-tap" = homebrew-dark-notify;
+                "chemaclass/homebrew-tap" = homebrew-chemaclass;
               };
 
               # Optional: Enable fully-declarative tap management
