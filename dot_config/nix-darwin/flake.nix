@@ -6,8 +6,14 @@
     nix-darwin.url = "github:LnL7/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     mac-app-util.url = "github:hraban/mac-app-util";
+    # Override until nix-homebrew bumps past 7.0.11 (needs manifest_sha256 for current core).
+    brew-src = {
+      url = "github:Homebrew/brew/7.0.15";
+      flake = false;
+    };
     nix-homebrew = {
       url = "github:zhaofengli/nix-homebrew";
+      inputs.brew-src.follows = "brew-src";
     };
     homebrew-core = {
       url = "github:homebrew/homebrew-core";
@@ -17,8 +23,10 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
+    # Pin tap to formula 0.7.2: main/0.7.3rc1 fails spaCy check (jundot/omlx#4942).
+    # If 0.7.2 hits OverflowError in spacy.load (#4831), fall back to the 0.7.1 bump commit.
     homebrew-jundot-omlx = {
-      url = "github:jundot/omlx";
+      url = "github:jundot/omlx/2ecf1371";
       flake = false;
     };
     homebrew-mlx-serve = {
@@ -160,6 +168,7 @@
               "gh"
               "glab"
               "leaf-markdown-viewer"
+              "libpq"
               "llvm"
               "lld"
               "media-control"
@@ -185,6 +194,7 @@
               "bartender"
               "betterdisplay"
               "brave-browser"
+              "bruno"
               "cleanshot"
               "cursor"
               #"doppler-app"
@@ -198,7 +208,7 @@
               "jetbrains-toolbox"
               "keka"
               "mailspring"
-              "mlx-core"
+              "mlx-serve"
               "monitorcontrol"
               "ollama-app"
               "omlx-app"
@@ -206,6 +216,9 @@
               "orbstack"
               "puremac"
               "qlmarkdown"
+              "radix"
+              "radix"
+              "radix"
               "rectangle"
               #"rustdesk"
               "spotify"
